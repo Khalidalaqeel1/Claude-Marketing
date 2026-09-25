@@ -72,8 +72,12 @@
 
 ## حملة الليدز (٢٠٢٦-٠٩-٢٥)
 - الحملة `120248044547720539` باسم `SUI | LEADS-FORM | STR-Operators | KSA-5cities | 2026-10-01`: OUTCOME_LEADS، CBO ١٠٠ ر.س/يوم، الحد ١٬٤٠٠ ر.س، **PAUSED**. خالد وافق على ١٠٠ ر.س/يوم لـ١٤ يوم.
-- المجموعات: ❌ مرفوضة بـ subcode 1815089 (ToS / pages_manage_ads)، حتى بعد إعادة ربط الموصّل وإعطائه صلاحية الصفحة. الأرجح إن الجلسة ماسكة الصلاحية القديمة، والحل جلسة جديدة (`HANDOFF-new-session.md`).
-- النموذج: `SUI - Lead Form - STR Operators - AR - v1`، **مسودة**.
+- المجموعات: الموصّل ما يقدر ينشئها (subcode 1815089)، فالوكيل بناها من Ads Manager.
+  - A `Riyadh | Adv+ 25-60 | IG-only | CBO` رقمها `120248046284830539`: مسودة، **PAUSED**. الرياض ٢٥ ميل (≈٤٠ كم)، العمر المقترح ٢٥–٦٠، عربي وإنجليزي، إنستقرام فقط (stream, story, explore_home, reels, profile_feed, ig_search)، بدون صرف محدود على فيسبوك. تم التحقق عن طريق الموصّل في ٢٠٢٦-٠٩-٢٥.
+  - B `West+East`: ما انبنت بعد.
+- الإعلان `SYSTEM | IMG | H1+H2 | v1` رقمه `120248046284820539`: مسودة، **PAUSED**. النموذج مربوط فيه، بس الصورة والنص ما انحطوا. تحسينات Advantage+ القياسية مفعّلة (standard_enhancements OPT_IN، وصوت random)، ولازم تنطفي.
+- العوائق: (١) «You must have a verified phone number associated with your ad account (#3858013)»، ويحلها خالد. (٢) «The current selected placement is not supported for forms using 'Higher Intent' Form Type».
+- النموذج: `SUI - Lead Form - STR Operators - AR - v1` رقمه `1618687339646791`، **منشور** (Higher intent).
 - التصاميم: `creatives/` (١٠ ملفات).
 
 ## جلسة جديدة (٢٠٢٦-٠٩-٢٥، بعد إعادة ربط الموصّل)
