@@ -69,3 +69,9 @@
 - البيانات المشفّرة للـ Lead ما تنرسل إلا بموافقة تسويقية، يعني دقة مطابقة أقل. مقترح: نضيف خانة موافقة للنماذج.
 - بعد النشر: الـ media buyer يتأكد عن طريق ads_get_dataset_stats / ads_get_dataset_quality.
 - الموافقة (commit `fe070e66` على نفس الفرع): خانة اختيارية غير معلّمة في access-form (الرئيسية + /contact)، والتخزين `ads_consent` / `_at` / `_version` في `access_requests` و`waitlist_entries`، والهاش ما ينرسل إلا بالموافقة. التسجيل يستخدم `marketing_consent` الموجود. الاختبارات **ما تشغّلت**.
+
+## حملة الليدز (٢٠٢٦-٠٩-٢٥)
+- الحملة `120248044547720539` باسم `SUI | LEADS-FORM | STR-Operators | KSA-5cities | 2026-10-01`: OUTCOME_LEADS، CBO ١٠٠ ر.س/يوم، الحد ١٬٤٠٠ ر.س، **PAUSED**. خالد وافق على ١٠٠ ر.س/يوم لـ١٤ يوم.
+- المجموعات: ❌ مرفوضة بـ subcode 1815089 (ToS / pages_manage_ads)، حتى بعد إعادة ربط الموصّل وإعطائه صلاحية الصفحة. الأرجح إن الجلسة ماسكة الصلاحية القديمة، والحل جلسة جديدة (`HANDOFF-new-session.md`).
+- النموذج: `SUI - Lead Form - STR Operators - AR - v1`، **مسودة**.
+- التصاميم: `creatives/` (١٠ ملفات).
