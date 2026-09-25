@@ -75,3 +75,21 @@
 - المجموعات: ❌ مرفوضة بـ subcode 1815089 (ToS / pages_manage_ads)، حتى بعد إعادة ربط الموصّل وإعطائه صلاحية الصفحة. الأرجح إن الجلسة ماسكة الصلاحية القديمة، والحل جلسة جديدة (`HANDOFF-new-session.md`).
 - النموذج: `SUI - Lead Form - STR Operators - AR - v1`، **مسودة**.
 - التصاميم: `creatives/` (١٠ ملفات).
+
+## جلسة جديدة (٢٠٢٦-٠٩-٢٥، بعد إعادة ربط الموصّل)
+- **المجموعات:** ❌ نفس الرفض `subcode 1815089` على أول مجموعة (Riyadh)، حتى في جلسة جديدة. ما عدنا المحاولة.
+  - `ads_get_ad_account_pages` للحساب يرجّع قائمة **فاضية**، يعني الصفحة `1360833533775829` مو مربوطة بالحساب من جهة الموصّل، وهو ما يقدر يقرا `leadgen_tos_accepted`.
+- **مكتبة الصور:** ✅ الـ١٠ تصاميم انرفعت بنفس الأسماء:
+
+| الملف | image_hash |
+|---|---|
+| 01-system_4x5.png | `67d7e0ae2e825f70497d4d7eae59e811` |
+| 01-system_9x16.png | `9dd90379dfa20df2251cfadefe1c4569` |
+| 02-calendar_4x5.png | `84b014b1c9711620c1a43ad89ba6af33` |
+| 02-calendar_9x16.png | `b4389a0404cb79cdab02b15d41131a01` |
+| 03-cleaning_4x5.png | `cc4e6f8441e884c22e16365cb0dd2077` |
+| 03-cleaning_9x16.png | `b549549ececd4c61a1a1bb2866ae7b33` |
+| 04-scale_4x5.png | `4584de4874643afd3289e438a682005a` |
+| 04-scale_9x16.png | `d951983e0f68b40b4268f55bcac863ef` |
+| 05-trial_4x5.png | `c14b951b102956f8f2633887650e6f14` |
+| 05-trial_9x16.png | `b4cabe9d0cccd76ac1dca87e726d8cf8` |
