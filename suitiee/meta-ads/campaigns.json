@@ -1,0 +1,119 @@
+{
+  "_readme": "Suitiee Meta Ads build spec. Create EVERYTHING with status PAUSED. Do not activate or spend without explicit approval from Khalid in the same session. Verify field values against the current Marketing API version before calling it. Human-readable version: campaign-build.md",
+  "account": {
+    "currency": "SAR",
+    "timezone": "Asia/Riyadh",
+    "spend_cap_sar": 6000,
+    "instagram_account": "@suitiee.sa",
+    "whatsapp_required": true,
+    "pixel_domain": "suitiee.com",
+    "special_ad_categories": [],
+    "special_ad_category_fallback": "HOUSING (only if Meta flags or rejects the ads; then age becomes 18-65+)"
+  },
+  "naming": {
+    "campaign": "SUIT | {PHASE} | {GOAL} | {YYMM}",
+    "adset": "SUIT | {PHASE} | {AUDIENCE} | V{video}",
+    "ad": "V{video} | H{A|B|C} | {keyword}"
+  },
+  "audiences": {
+    "core_targeting": {
+      "geo": {"city": "Riyadh", "radius_km": 25},
+      "age_min": 27,
+      "age_max": 60,
+      "genders": "all",
+      "locales": ["ar", "en"],
+      "advantage_audience": true,
+      "interest_suggestions": ["Real estate investing", "Airbnb", "Property management", "Vacation rental", "Real estate"],
+      "placements": "advantage_plus",
+      "exclude_placements": ["audience_network"]
+    },
+    "custom": [
+      {"name": "RT-Video50-30d", "source": "video_viewers_50pct_fb_ig", "retention_days": 30},
+      {"name": "RT-IG-Engaged-30d", "source": "instagram_business_profile_engaged", "retention_days": 30},
+      {"name": "RT-Site-30d", "source": "pixel_all_visitors", "retention_days": 30},
+      {"name": "EX-Leads-60d", "source": "whatsapp_conversations_and_lead_form_submitters", "retention_days": 60, "use": "exclusion"}
+    ]
+  },
+  "campaigns": [
+    {
+      "name": "SUIT | TEST | CTWA | 2610",
+      "phase": "2 - creative test (days 10-20)",
+      "status": "PAUSED",
+      "objective": "OUTCOME_LEADS",
+      "budget_level": "adset",
+      "spend_cap_sar": 2000,
+      "adsets": [
+        {"name": "SUIT | TEST | Riyadh-Broad | V{best1}", "daily_budget_sar": 65, "duration_days": 10, "destination_type": "WHATSAPP", "optimization_goal": "CONVERSATIONS", "billing_event": "IMPRESSIONS", "bid_strategy": "LOWEST_COST_WITHOUT_CAP", "targeting": "core_targeting", "ads": ["HA", "HB", "HC"]},
+        {"name": "SUIT | TEST | Riyadh-Broad | V{best2}", "daily_budget_sar": 65, "duration_days": 10, "destination_type": "WHATSAPP", "optimization_goal": "CONVERSATIONS", "billing_event": "IMPRESSIONS", "bid_strategy": "LOWEST_COST_WITHOUT_CAP", "targeting": "core_targeting", "ads": ["HA", "HB", "HC"]},
+        {"name": "SUIT | TEST | Riyadh-Broad | V{best3}", "daily_budget_sar": 65, "duration_days": 10, "destination_type": "WHATSAPP", "optimization_goal": "CONVERSATIONS", "billing_event": "IMPRESSIONS", "bid_strategy": "LOWEST_COST_WITHOUT_CAP", "targeting": "core_targeting", "ads": ["HA", "HB", "HC"]}
+      ]
+    },
+    {
+      "name": "SUIT | SCALE | CTWA | 2610",
+      "phase": "3 - scale (days 18-30)",
+      "status": "PAUSED",
+      "objective": "OUTCOME_LEADS",
+      "budget_level": "campaign",
+      "daily_budget_sar": 290,
+      "duration_days": 12,
+      "spend_cap_sar": 3500,
+      "adsets": [
+        {"name": "SUIT | SCALE | Riyadh-Broad | Winners", "destination_type": "WHATSAPP", "optimization_goal": "CONVERSATIONS", "targeting": "core_targeting", "ads": "top 2 ads from TEST by cost per qualified owner lead, reuse same post IDs"}
+      ],
+      "scale_rule": "+20% budget every 48h after 3 days at or under target cost; manual, after approval"
+    },
+    {
+      "name": "SUIT | RT | CTWA | 2610",
+      "phase": "4 - retarget (days 18-30)",
+      "status": "PAUSED",
+      "objective": "OUTCOME_LEADS",
+      "budget_level": "adset",
+      "spend_cap_sar": 500,
+      "adsets": [
+        {"name": "SUIT | RT | Video50+IG | V10+V9", "daily_budget_sar": 40, "duration_days": 12, "destination_type": "WHATSAPP", "optimization_goal": "CONVERSATIONS", "include_audiences": ["RT-Video50-30d", "RT-IG-Engaged-30d"], "exclude_audiences": ["EX-Leads-60d"], "ads": ["V10 testimonial", "V9 three numbers / report"], "frequency_alert": 3}
+      ]
+    }
+  ],
+  "creative": {
+    "format": "vertical 9:16 video, ~30s, clean export without TikTok watermark, Arabic subtitles burned in",
+    "source": "existing Instagram post IDs of the organic reels (keeps social proof)",
+    "cta_type": "WHATSAPP_MESSAGE",
+    "primary_text_template": "{hook line}\n{benefit line from body 3}\n👇 كلمنا واتساب ونفحص لك إعلان شقتك مجاناً.",
+    "headline": "فحص مجاني لإعلان شقتك",
+    "description": "سويتي · إدارة شقق الإيجار اليومي بالرياض",
+    "whatsapp_greeting": "هلا 👋 حياك الله في سويتي. وش تحب نساعدك فيه؟",
+    "whatsapp_ice_breakers": ["أبي فحص مجاني لإعلان شقتي", "كم تاخذون على إدارة الشقة؟", "شقتي على منصة وحدة، أبي أوسعها", "أبي أكلم أحد"],
+    "example_ad_v1": {
+      "name": "V1 | HA | حجز",
+      "primary_text": "شقتك على جاذر إن وما تنحجز؟\nأغلب الإعلانات اللي نفحصها فيها ٣ أخطاء تتكرر: الغلاف، العنوان، وسرعة الرد.\n👇 كلمنا واتساب ونفحص لك إعلان شقتك مجاناً."
+    }
+  },
+  "instant_form_backup": {
+    "name": "SUIT – Owner audit form",
+    "type": "HIGHER_INTENT",
+    "headline": "فحص مجاني لإعلان شقتك",
+    "questions": [
+      {"label": "الحي", "type": "short_answer"},
+      {"label": "عدد الغرف", "type": "multiple_choice", "options": ["استوديو", "غرفة", "غرفتين", "٣ غرف أو أكثر"]},
+      {"label": "الشقة على أي منصات؟", "type": "multiple_choice", "options": ["جاذر إن", "إير بي إن بي", "بوكينق", "أكثر من منصة", "ما هي معروضة"]},
+      {"label": "تديرها بنفسك ولا مع شركة؟", "type": "multiple_choice", "options": ["بنفسي", "مع شركة", "لسا ما بدأت"]},
+      {"label": "رابط الإعلان (اختياري)", "type": "short_answer", "optional": true},
+      {"type": "FULL_NAME"},
+      {"type": "PHONE"}
+    ],
+    "privacy_policy_url": "https://suitiee.com (privacy page, confirm the exact URL)",
+    "thank_you": "وصلنا طلبك ✅ بنرسل لك الفحص خلال ٢٤ ساعة على الواتساب."
+  },
+  "automated_rules": [
+    {"name": "Pause: no conversations", "if": "spend >= 150 SAR AND conversations == 0", "then": "pause ad + notify", "schedule": "daily", "enabled_as": "notify_only_until_target_cpl_set"},
+    {"name": "Pause: high cost", "if": "spend >= 150 SAR AND cost_per_conversation > 2x target", "then": "pause ad + notify", "schedule": "daily", "enabled_as": "notify_only_until_target_cpl_set"},
+    {"name": "Weak hook", "if": "impressions >= 2000 AND 3s_view_rate < 25%", "then": "notify", "schedule": "daily"},
+    {"name": "Ready to scale", "if": "cost_per_conversation <= target for 3 days", "then": "notify", "schedule": "every_48h"},
+    {"name": "Fatigue", "if": "frequency > 3 (RT campaign)", "then": "notify", "schedule": "daily"}
+  ],
+  "reporting": {
+    "cadence": "every 2 days",
+    "fields": ["spend", "conversations", "cost_per_conversation", "qualified_owner_leads (from CRM)", "best_ad", "worst_ad", "3s_view_rate", "frequency"],
+    "save_to": "Obsidian: Suitiee/Marketing/Meta Ads/Reports/{YYYY-MM-DD}.md"
+  }
+}

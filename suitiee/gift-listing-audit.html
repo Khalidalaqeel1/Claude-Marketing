@@ -1,0 +1,368 @@
+<title>فحص إعلان الشقة</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Readex+Pro:wght@500;700&family=IBM+Plex+Sans+Arabic:wght@400;500;700&display=swap">
+<style>
+:root{
+  --bg:#FFFFFF; --ink:#111111; --muted:#5E5E5E; --line:#E4E4E4; --soft:#F7F7F7;
+  --hl:#F4CCCC; --hl-ink:#111111; --blue:#1155CC; --blue-soft:#E8EEFA;
+  --good:#1F7A45; --good-soft:#E3F3E9; --mid:#9A6A00; --mid-soft:#FBF1D9; --bad:#B42318; --bad-soft:#FBE7E5;
+  --display:"Readex Pro","IBM Plex Sans Arabic",Arial,sans-serif;
+  --body:"IBM Plex Sans Arabic","Readex Pro",Arial,"Segoe UI",sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#141414; --ink:#EDEDED; --muted:#A5A5A5; --line:#2E2E2E; --soft:#1C1C1C;
+    --hl:#5E3236; --hl-ink:#FFF3F3; --blue:#86A9F0; --blue-soft:#1C2740;
+    --good:#6CCB91; --good-soft:#15291D; --mid:#E6B94A; --mid-soft:#2E2512; --bad:#F2877D; --bad-soft:#35191A;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#141414; --ink:#EDEDED; --muted:#A5A5A5; --line:#2E2E2E; --soft:#1C1C1C;
+  --hl:#5E3236; --hl-ink:#FFF3F3; --blue:#86A9F0; --blue-soft:#1C2740;
+  --good:#6CCB91; --good-soft:#15291D; --mid:#E6B94A; --mid-soft:#2E2512; --bad:#F2877D; --bad-soft:#35191A;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.7;padding-inline:16px;padding-block:0 64px}
+.wrap{max-width:1180px;margin:0 auto;padding-block:36px}
+h1{font-family:var(--display);font-weight:700;font-size:clamp(30px,5.5vw,48px);line-height:1.25;margin:0 0 14px;text-wrap:balance}
+h1 mark{background:var(--hl);color:var(--hl-ink);padding:0 .18em}
+.callout{font-family:var(--display);font-weight:700;font-size:20px;margin:0 0 6px}
+.intro{max-width:66ch;margin:0 0 10px}
+h2{font-family:var(--display);font-weight:700;font-size:22px;margin:0 0 8px}
+h3{font-family:var(--display);font-weight:700;font-size:17px;margin:0 0 6px}
+a{color:var(--blue)}
+ol.steps{list-style:none;padding:0;margin:14px 0 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;counter-reset:s}
+ol.steps li{counter-increment:s;border:1px solid var(--line);border-radius:4px;padding:10px 12px;font-size:14.5px}
+ol.steps li b{display:block;font-weight:700}
+ol.steps li b::before{content:counter(s) ". ";color:var(--blue)}
+.cols{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:28px;margin-top:30px;align-items:start}
+@media (max-width:960px){.cols{grid-template-columns:minmax(0,1fr)}}
+.panel{border:1px solid var(--line);border-radius:4px}
+.panel>header{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between;padding:12px 16px;border-bottom:1px solid var(--line);background:var(--soft)}
+.panel>header h2{margin:0;font-size:19px}
+.panel .inner{padding:16px}
+.example{font-size:12.5px;font-weight:700;background:var(--hl);color:var(--hl-ink);padding:1px 8px;border-radius:3px}
+.fields{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px}
+label.f{display:grid;gap:4px;font-size:14px;font-weight:500}
+input[type=text],input[type=url],textarea{font:inherit;font-size:15px;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:4px;padding:7px 10px;width:100%}
+textarea{min-height:64px;resize:vertical}
+input:focus-visible,textarea:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offset:1px}
+.plats{display:flex;flex-wrap:wrap;gap:12px;font-size:14.5px}
+.plats label{display:flex;gap:6px;align-items:center}
+.plats input{accent-color:var(--blue);width:16px;height:16px}
+fieldset.cat{border:0;border-top:1px solid var(--line);margin:0;padding:14px 16px}
+fieldset.cat legend{display:contents}
+.cathead{display:flex;justify-content:space-between;align-items:baseline;gap:8px;margin-bottom:6px}
+.cathead h3{margin:0}
+.catscore{font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
+.item{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px 12px;align-items:center;padding:8px 0;border-bottom:1px dashed var(--line)}
+.item:last-child{border-bottom:0}
+.item .q{font-size:15px}
+.item .hint{grid-column:1/-1;font-size:13px;color:var(--muted);margin-top:-4px}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:4px;overflow:hidden}
+.seg input{position:absolute;opacity:0;pointer-events:none}
+.seg label{padding:3px 10px;font-size:13.5px;cursor:pointer;border-inline-start:1px solid var(--line);white-space:nowrap}
+.seg label:first-of-type{border-inline-start:0}
+.seg input:focus-visible+label{outline:2px solid var(--blue);outline-offset:-2px}
+.seg input.g:checked+label{background:var(--good-soft);color:var(--good);font-weight:700}
+.seg input.m:checked+label{background:var(--mid-soft);color:var(--mid);font-weight:700}
+.seg input.b:checked+label{background:var(--bad-soft);color:var(--bad);font-weight:700}
+@media (max-width:520px){.item{grid-template-columns:1fr}}
+.side{position:sticky;top:calc(env(safe-area-inset-top,0px) + 12px);display:grid;gap:16px}
+@media (max-width:960px){.side{position:static}}
+.score{display:flex;gap:16px;align-items:center}
+.ring{--p:0;width:92px;height:92px;border-radius:50%;background:conic-gradient(var(--c,var(--blue)) calc(var(--p)*1%),var(--line) 0);display:grid;place-items:center;flex:none}
+.ring span{width:74px;height:74px;border-radius:50%;background:var(--bg);display:grid;place-items:center;font-family:var(--display);font-weight:700;font-size:24px;font-variant-numeric:tabular-nums}
+.bars{display:grid;gap:5px;flex:1;min-width:0}
+.bar{display:grid;grid-template-columns:92px minmax(0,1fr) 38px;gap:8px;align-items:center;font-size:13px}
+.bar .track{height:7px;background:var(--line);border-radius:4px;overflow:hidden}
+.bar .fill{display:block;height:100%;background:var(--blue)}
+.bar .v{text-align:left;font-variant-numeric:tabular-nums;color:var(--muted)}
+.rec{border-inline-start:3px solid var(--blue);padding:4px 12px;font-size:14.5px}
+.report{white-space:pre-line;border:1px solid var(--line);border-radius:4px;padding:14px 16px;font-size:15px;line-height:1.8;max-height:560px;overflow:auto;background:var(--bg)}
+.actions{display:flex;flex-wrap:wrap;gap:8px}
+button.btn{font:inherit;font-size:14px;border:1px solid var(--line);background:var(--soft);color:var(--ink);border-radius:4px;padding:6px 14px;cursor:pointer}
+button.btn.primary{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+button.btn:hover{border-color:var(--blue)}
+.dmguide{margin-top:34px;border-top:1px solid var(--line);padding-top:24px}
+.msgs{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}
+.msg{border:1px solid var(--line);border-radius:4px;padding:12px 14px;display:grid;gap:8px;align-content:start}
+.msg .when{font-size:12.5px;font-weight:700;color:var(--blue)}
+.msg .txt{white-space:pre-line;font-size:14.5px}
+.msg button{justify-self:start}
+footer{margin-top:40px;padding-top:14px;border-top:1px solid var(--line);color:var(--muted);font-size:13.5px}
+</style>
+
+<div class="wrap" dir="rtl" lang="ar">
+<header>
+  <h1><mark>فحص إعلان الشقة المجاني</mark></h1>
+  <p class="callout">هدية فيديو "حجز": ١٥ دقيقة فحص، وتقرير جاهز يوصل المالك بالخاص.</p>
+  <p class="intro">افتح إعلان المالك، قيّم كل نقطة، وانسخ التقرير. التقرير مكتوب بنفس هيكل الملف المرجعي: عنوان، دعوة للتواصل، <b>أهم ٣ تعديلات مرقمة</b>، فكرة ختامية، والخدمة المناسبة لشقته.</p>
+  <ol class="steps">
+    <li><b>المالك يعلق "حجز"</b>الأداة ترد، والرد التلقائي بالخاص يطلب رابط الإعلان.</li>
+    <li><b>يوصل الرابط</b>رد عليه برسالة "استلمنا" (تحت)، والوعد: التقرير خلال ٢٤ ساعة.</li>
+    <li><b>عبّ الفحص</b>٢٠ نقطة في ٦ أقسام. الدرجة والتقرير يتحدثون وأنت تعبي.</li>
+    <li><b>انسخ التقرير وأرسله</b>بالخاص، ومعه رابط الواتساب.</li>
+    <li><b>تابع بعد ٤٨ ساعة</b>رسالة المتابعة جاهزة تحت، والهدف مكالمة قصيرة.</li>
+  </ol>
+</header>
+
+<div class="cols">
+  <div class="panel" id="form">
+    <header><h2>الفحص</h2><span class="example" id="exampleTag">مثال معبّى: امسحه وابدأ</span></header>
+    <div class="inner">
+      <div class="fields">
+        <label class="f" for="owner">اسم المالك<input type="text" id="owner" autocomplete="off"></label>
+        <label class="f" for="district">الحي<input type="text" id="district" autocomplete="off"></label>
+        <label class="f" for="unit">نوع الشقة<input type="text" id="unit" autocomplete="off" placeholder="مثلاً: غرفتين وصالة"></label>
+        <label class="f" for="link">رابط الإعلان<input type="url" id="link" autocomplete="off" dir="ltr"></label>
+      </div>
+      <p style="margin:12px 0 4px;font-size:14px;font-weight:500">المنصات اللي الشقة عليها</p>
+      <div class="plats" id="plats">
+        <label><input type="checkbox" id="p_gathern" value="جاذر إن">جاذر إن</label>
+        <label><input type="checkbox" id="p_airbnb" value="إير بي إن بي">إير بي إن بي</label>
+        <label><input type="checkbox" id="p_booking" value="بوكينق">بوكينق</label>
+        <label><input type="checkbox" id="p_other" value="منصة ثانية">ثانية</label>
+      </div>
+    </div>
+    <div id="cats"></div>
+    <div class="inner" style="border-top:1px solid var(--line)">
+      <label class="f" for="note">ملاحظة خاصة لهالشقة (تطلع بالتقرير، اختياري)<textarea id="note" placeholder="مثلاً: الإطلالة على البوليفارد مو ظاهرة بأي صورة، حطها غلاف."></textarea></label>
+    </div>
+  </div>
+
+  <aside class="side">
+    <div class="panel">
+      <header><h2>النتيجة</h2></header>
+      <div class="inner" style="display:grid;gap:14px">
+        <div class="score">
+          <div class="ring" id="ring"><span id="total">0</span></div>
+          <div class="bars" id="bars"></div>
+        </div>
+        <div class="rec" id="rec"></div>
+      </div>
+    </div>
+    <div class="panel">
+      <header><h2>التقرير للمالك</h2>
+        <div class="actions">
+          <button class="btn primary" type="button" id="copyReport">انسخ التقرير</button>
+        </div>
+      </header>
+      <div class="inner"><div class="report" id="report"></div></div>
+    </div>
+    <div class="actions">
+      <button class="btn" type="button" id="reset">فحص جديد</button>
+      <button class="btn" type="button" id="loadExample">عبّ المثال</button>
+    </div>
+  </aside>
+</div>
+
+<section class="dmguide">
+  <h2>رسايل الخاص حول الفحص</h2>
+  <p class="intro">انسخها كما هي، أو عدّلها بأسلوبك. الأقواس [ ] تتعبى قبل الإرسال.</p>
+  <div class="msgs" id="msgs"></div>
+</section>
+
+<footer>سويتي · هدية فيديو ١ (حجز) · التقرير ما يذكر أسعار. الأسعار بالمكالمة. الفحص يحفظ مسودته بهالمتصفح بس.</footer>
+</div>
+
+<script>
+(function(){
+  var WA = "[رابط الواتساب]";
+  // category: id, name, weight, items [id, question, hint, fixTitle, fixText, service]
+  // service: "ch" = fixed by channel management, "full" = needs full management, "any"
+  var CATS = [
+    {id:"photos",name:"الصور",w:25,items:[
+      ["cover","صورة الغلاف مضيئة وواضحة وتبيّن أحلى زاوية","الغلاف مو حمام أو ممر أو صورة معتمة","غيّر صورة الغلاف","الضيف يقرر بثانيتين. خل الغلاف أوسع وأنور زاوية بالشقة (الصالة غالباً)، مصورة الصبح والستاير مفتوحة.","any"],
+      ["order","أول ٥ صور مرتبة: صالة، نوم، أقوى ميزة","","رتّب أول ٥ صور","أول ٥ صور هي إعلانك فعلياً. الترتيب اللي ينفع: الصالة، غرفة النوم، أقوى ميزة عندك، المطبخ، الحمام.","any"],
+      ["count","عدد الصور كافي (١٥ أو أكثر) وكل غرفة مصورة","","زيد عدد الصور","الضيف يبي يشوف كل زاوية قبل ما يدفع. صوّر كل غرفة من زاويتين على الأقل.","any"],
+      ["details","فيه صور للتفاصيل: القهوة، المفارش، القفل، الإطلالة","","أضف صور التفاصيل","صور القهوة والمفارش والقفل الذكي والإطلالة تبيع التجربة، مو بس الغرفة.","any"]
+    ]},
+    {id:"price",name:"التسعير",w:20,items:[
+      ["weekend","السعر يتغير بين الويكند ووسط الأسبوع","افتح التقويم وقارن الخميس بالأحد","خل للويكند سعر","الخميس والجمعة طلبهم أعلى. السعر الثابت يعني تبيع الويكند أرخص من السوق.","ch"],
+      ["market","السعر قريب من الشقق المشابهة بنفس الحي","قارن ٣ شقق بنفس الحجم","راجع سعرك مع السوق","سعرك بعيد عن الشقق المشابهة بالحي. الأغلى من اللازم ما ينحجز، والأرخص يخسرك فلوس.","ch"],
+      ["events","السعر يرتفع وقت المواسم والفعاليات","شيك تواريخ الفعاليات الجاية","سعّر المواسم بدري","المواسم والفعاليات بالرياض ترفع الطلب قبلها بأسابيع. ارفع سعرك من الحين مو بيومها.","ch"],
+      ["discounts","فيه خصم للإقامة الأسبوعية أو الشهرية","","أضف خصم الإقامة الطويلة","خصم الأسبوع والشهر يملأ الفترات الهادية ويقلل التنظيف والتشغيل.","ch"]
+    ]},
+    {id:"copy",name:"العنوان والوصف",w:15,items:[
+      ["title","العنوان يذكر ميزة أو موقع، مو \"شقة مفروشة\"","","عدّل العنوان","اكتب وش يميزك بالعنوان: القرب من معلم معروف، دخول ذاتي، موقف خاص، إطلالة.","ch"],
+      ["desc","الوصف يبدأ بأهم ميزة وجمله قصيرة","","اختصر الوصف","أول سطرين بالوصف هم اللي ينقرون. ابدأ بأقوى ميزة، وخل الباقي نقاط قصيرة.","ch"],
+      ["amenities","المرافق كاملة بالقائمة (واي فاي، موقف، قفل ذكي…)","","كمّل قائمة المرافق","الضيوف يفلترون بالمرافق. أي ميزة مو مضافة بالقائمة، شقتك ما تطلع لمن يبحث عنها.","ch"]
+    ]},
+    {id:"reviews",name:"التقييمات",w:15,items:[
+      ["rating","التقييم ٤٫٧ أو أعلى","","ارفع التقييم","التقييم تحت ٤٫٧ ينزل ظهورك. أغلب التقييمات السيئة تبدأ من الدخول والنظافة.","full"],
+      ["reply","المالك يرد على التقييمات، خصوصاً السلبية","","رد على التقييمات","الضيف الجاي يقرأ ردك قبل التقييم نفسه. رد هادي ومحترم على كل ملاحظة يرفع الثقة.","full"],
+      ["complaints","ما فيه شكوى تتكرر (نظافة، دخول، إزعاج)","اقرأ آخر ١٠ تقييمات","حل الشكوى المتكررة","فيه ملاحظة تتكرر بالتقييمات. هذي مشكلة تشغيل، ولازم تنحل من جذرها قبل أي تعديل على الإعلان.","full"]
+    ]},
+    {id:"ops",name:"التواصل والسياسات",w:10,items:[
+      ["instant","الحجز الفوري مفعّل","","فعّل الحجز الفوري","المنصات تعطي أولوية للإعلانات اللي تنحجز فوراً، والضيف يفضلها.","ch"],
+      ["rules","قوانين الشقة وطريقة الدخول واضحة بالإعلان","","وضّح القوانين والدخول","قوانين مكتوبة وطريقة دخول واضحة تقلل المشاكل وتحمي شقتك.","full"],
+      ["response","سرعة الرد عالية (إن كانت ظاهرة بالإعلان)","","سرّع الرد","الضيف يراسل كذا شقة بنفس الوقت، واللي يرد أول ياخذ الحجز.","full"]
+    ]},
+    {id:"dist",name:"التوزيع والتقويم",w:15,items:[
+      ["multi","الشقة على أكثر من منصة","","اعرضها على أكثر من منصة","كل منصة لها جمهورها. منصة وحدة تعني ليالي فاضية أكثر.","ch"],
+      ["calendar","التقويم مفتوح للأشهر الجاية ومحدّث","","افتح التقويم لقدام","كثير ضيوف يحجزون قبل بأسابيع. التقويم المقفل يضيع هالحجوزات.","ch"],
+      ["consistent","نفس المعلومات والصور بين المنصات","","وحّد الإعلان بين المنصات","اختلاف المعلومات بين المنصات يربك الضيف ويقلل الثقة.","ch"]
+    ]}
+  ];
+  var VAL = {g:1, m:0.5, b:0};
+  var LBL = {g:"ممتاز", m:"يحتاج تحسين", b:"ضعيف"};
+
+  // Build form
+  var catsEl = document.getElementById("cats");
+  catsEl.innerHTML = CATS.map(function(c){
+    return '<fieldset class="cat" id="cat_'+c.id+'"><legend></legend><div class="cathead"><h3>'+c.name+'</h3><span class="catscore" id="cs_'+c.id+'"></span></div>'+
+      c.items.map(function(it){
+        var name = c.id+"_"+it[0];
+        return '<div class="item"><span class="q" id="q_'+name+'">'+it[1]+'</span><span class="seg" role="radiogroup" aria-labelledby="q_'+name+'">'+
+          ["g","m","b"].map(function(v){ return '<input type="radio" class="'+v+'" name="'+name+'" id="'+name+'_'+v+'" value="'+v+'"><label for="'+name+'_'+v+'">'+LBL[v]+'</label>'; }).join("")+
+          '</span>'+(it[2]?'<span class="hint">'+it[2]+'</span>':'')+'</div>';
+      }).join("")+'</fieldset>';
+  }).join("");
+
+  var ids = ["owner","district","unit","link","note"];
+  var platIds = ["p_gathern","p_airbnb","p_booking","p_other"];
+
+  function state(){
+    var s = {f:{},p:{},r:{}};
+    ids.forEach(function(i){ s.f[i] = document.getElementById(i).value; });
+    platIds.forEach(function(i){ s.p[i] = document.getElementById(i).checked; });
+    CATS.forEach(function(c){ c.items.forEach(function(it){ var n=c.id+"_"+it[0]; var el=document.querySelector('input[name="'+n+'"]:checked'); if(el) s.r[n]=el.value; }); });
+    return s;
+  }
+  function apply(s){
+    ids.forEach(function(i){ document.getElementById(i).value = (s.f&&s.f[i])||""; });
+    platIds.forEach(function(i){ document.getElementById(i).checked = !!(s.p&&s.p[i]); });
+    document.querySelectorAll('#cats input[type=radio]').forEach(function(r){ r.checked = false; });
+    Object.keys(s.r||{}).forEach(function(n){ var el=document.getElementById(n+"_"+s.r[n]); if(el) el.checked = true; });
+  }
+
+  var EXAMPLE = {ex:true,f:{owner:"أبو فهد (مثال)",district:"الملقا",unit:"غرفتين وصالة",link:"https://example.com/listing",note:"الجلسة الخارجية أحلى شي بالشقة وما هي بأول ١٠ صور."},
+    p:{p_gathern:true},
+    r:{photos_cover:"b",photos_order:"m",photos_count:"g",photos_details:"b",price_weekend:"b",price_market:"m",price_events:"b",price_discounts:"m",copy_title:"b",copy_desc:"m",copy_amenities:"g",reviews_rating:"g",reviews_reply:"m",reviews_complaints:"g",ops_instant:"g",ops_rules:"m",ops_response:"g",dist_multi:"b",dist_calendar:"m",dist_consistent:"g"}};
+
+  function compute(){
+    var s = state();
+    var total = 0, answered = 0, cats = [], issues = [];
+    CATS.forEach(function(c){
+      var per = c.w / c.items.length, got = 0, done = 0;
+      c.items.forEach(function(it){
+        var v = s.r[c.id+"_"+it[0]];
+        if (v){ done++; answered++; got += per*VAL[v]; if (v!=="g") issues.push({cat:c, it:it, v:v, loss: per*(1-VAL[v])}); }
+      });
+      // unanswered items count as full so a partial audit isn't punished
+      got += per*(c.items.length-done);
+      total += got;
+      cats.push({c:c, pct: Math.round(got/c.w*100), done:done});
+    });
+    issues.sort(function(a,b){ return (b.v==="b")-(a.v==="b") || b.loss-a.loss; });
+    return {s:s,total:Math.round(total),cats:cats,issues:issues,answered:answered};
+  }
+
+  function recommend(issues){
+    var full = issues.filter(function(x){ return x.it[5]==="full"; }).length;
+    var ch = issues.filter(function(x){ return x.it[5]==="ch"; }).length;
+    if (!issues.length) return {key:"none", text:"إعلانك قوي. تقدر تزيد دخلك بتوزيعه على منصات أكثر وتسعير يتغير مع الطلب."};
+    var fullBad = issues.some(function(x){ return x.it[5]==="full" && x.v==="b"; });
+    if (fullBad || full > ch) return {key:"full", text:"الإدارة الكاملة: أغلب الملاحظات عندك بالتشغيل (التقييمات، الدخول، الرد)، وهذي نمسكها عنك من الألف للياء."};
+    return {key:"ch", text:"إدارة القنوات: أغلب الملاحظات بالتسعير والإعلان والمنصات، وهذي نمسكها لك وأنت تكمل التشغيل بنفسك."};
+  }
+
+  function report(r){
+    var s = r.s, f = s.f;
+    var plats = platIds.filter(function(i){ return s.p[i]; }).map(function(i){ return document.getElementById(i).value; });
+    var top = r.issues.slice(0,3);
+    var lines = [];
+    lines.push("فحص إعلان شقتك" + (f.district ? " – حي " + f.district : ""));
+    lines.push("");
+    lines.push("نتيجة إعلانك: " + r.total + " من 100");
+    lines.push("تبي نصلحها لك؟ كلمنا واتساب: " + WA);
+    lines.push("");
+    lines.push("هلا " + (f.owner || "") + "، شفنا إعلان شقتك" + (f.unit ? " (" + f.unit + ")" : "") + (plats.length ? " على " + plats.join(" و") : "") + ".");
+    if (top.length){
+      lines.push("هذي أهم " + (top.length===1?"نقطة":top.length===2?"نقطتين":"٣ نقاط") + " لو تعدّلها بتفرق بالحجوزات:");
+      lines.push("");
+      top.forEach(function(x,i){ lines.push((i+1) + ". " + x.it[3]); lines.push(x.it[4]); lines.push(""); });
+    } else {
+      lines.push("إعلانك مرتب، وما لقينا فيه ملاحظات كبيرة 👏");
+      lines.push("");
+    }
+    if (f.note && f.note.trim()){ lines.push("ملاحظة خاصة لشقتك:"); lines.push(f.note.trim()); lines.push(""); }
+    var rest = r.issues.length - top.length;
+    if (rest > 0){ lines.push("وعندنا " + rest + " ملاحظات ثانية أصغر، نقدر نمرها معك بمكالمة ١٠ دقايق."); lines.push(""); }
+    lines.push("المهم مو إن شقتك معروضة… المهم إنها تطلع أول وتنحجز أول.");
+    lines.push("");
+    lines.push("الخدمة اللي تناسب شقتك:");
+    lines.push(recommend(r.issues).text);
+    lines.push("");
+    lines.push("سويتي · إدارة شقق الإيجار اليومي بالرياض");
+    lines.push("suitiee.com");
+    return lines.join("\n");
+  }
+
+  function render(){
+    var r = compute();
+    var ring = document.getElementById("ring");
+    ring.style.setProperty("--p", r.total);
+    ring.style.setProperty("--c", r.total>=80?"var(--good)":r.total>=60?"var(--mid)":"var(--bad)");
+    document.getElementById("total").textContent = r.total;
+    document.getElementById("bars").innerHTML = r.cats.map(function(x){
+      return '<div class="bar"><span>'+x.c.name+'</span><span class="track"><span class="fill" style="width:'+x.pct+'%"></span></span><span class="v">'+x.pct+'%</span></div>';
+    }).join("");
+    r.cats.forEach(function(x){ document.getElementById("cs_"+x.c.id).textContent = x.done+"/"+x.c.items.length+" · "+x.c.w+" نقطة"; });
+    var rec = recommend(r.issues);
+    document.getElementById("rec").innerHTML = '<b>التوصية:</b> '+rec.text;
+    document.getElementById("report").textContent = report(r);
+    save();
+  }
+
+  function save(){ try{ localStorage.setItem("suitiee-audit", JSON.stringify(state())); }catch(e){} }
+  function load(){ try{ var v = localStorage.getItem("suitiee-audit"); return v ? JSON.parse(v) : null; }catch(e){ return null; } }
+
+  var tag = document.getElementById("exampleTag");
+  function setExample(on){ tag.hidden = !on; }
+
+  var saved = load();
+  if (saved){ apply(saved); setExample(false); } else { apply(EXAMPLE); setExample(true); }
+  render();
+
+  document.getElementById("form").addEventListener("input", function(){ setExample(false); render(); });
+  document.getElementById("form").addEventListener("change", function(){ setExample(false); render(); });
+
+  var resetBtn = document.getElementById("reset"), armed = false, t;
+  resetBtn.addEventListener("click", function(){
+    if (!armed){ armed = true; resetBtn.textContent = "متأكد؟ اضغط مرة ثانية"; t = setTimeout(function(){ armed=false; resetBtn.textContent="فحص جديد"; }, 3000); return; }
+    clearTimeout(t); armed = false; resetBtn.textContent = "فحص جديد";
+    apply({f:{},p:{},r:{}}); setExample(false); render();
+  });
+  document.getElementById("loadExample").addEventListener("click", function(){ apply(EXAMPLE); render(); setExample(true); });
+
+  function copy(text, btn, el){
+    var label = btn.textContent;
+    function done(m){ btn.textContent = m; setTimeout(function(){ btn.textContent = label; }, 1500); }
+    function fallback(){ var rg=document.createRange(); rg.selectNodeContents(el); var sel=window.getSelection(); sel.removeAllRanges(); sel.addRange(rg); done("محدد، اضغط نسخ"); }
+    try{ navigator.clipboard.writeText(text).then(function(){ done("تم النسخ"); }, fallback); }catch(e){ fallback(); }
+  }
+  document.getElementById("copyReport").addEventListener("click", function(e){ var el=document.getElementById("report"); copy(el.textContent, e.currentTarget, el); });
+
+  var MSGS = [
+    ["لمن يوصل الرابط","استلمنا رابط شقتك 👌\nفريقنا بيفحص الإعلان ويرسل لك تقرير فيه أهم ٣ تعديلات خلال ٢٤ ساعة."],
+    ["مع التقرير","هذا تقرير شقتك 👇\n[الصق التقرير]\n\nلو حاب نمر عليه معك بمكالمة ١٠ دقايق، قلّي الوقت اللي يناسبك."],
+    ["متابعة بعد ٤٨ ساعة","هلا [الاسم]، طبقت شي من ملاحظات التقرير؟\nلو تبي، نقدر نعدّلها لك بنفسنا ونوريك الفرق خلال أسبوعين. يناسبك نتكلم اليوم أو بكرة؟"],
+    ["إذا قال \"كم تاخذون؟\"","عندنا طريقتين: إدارة قنوات (نمسك المنصات والتسعير وأنت تشغّل) أو إدارة كاملة.\nالسعر يعتمد على شقتك، وأفضل شي نحدده بمكالمة قصيرة. متى يناسبك؟"],
+    ["إذا ما رد","آخر رسالة مني 🙏 لو احتجت أي شي بخصوص شقتك مستقبلاً، رقمنا هنا: [رابط الواتساب]"]
+  ];
+  var msgsEl = document.getElementById("msgs");
+  MSGS.forEach(function(m){
+    var d = document.createElement("div"); d.className = "msg";
+    d.innerHTML = '<span class="when"></span><div class="txt"></div><button class="btn" type="button">انسخ</button>';
+    d.querySelector(".when").textContent = m[0];
+    d.querySelector(".txt").textContent = m[1];
+    d.querySelector("button").addEventListener("click", function(e){ copy(m[1], e.currentTarget, d.querySelector(".txt")); });
+    msgsEl.appendChild(d);
+  });
+})();
+</script>
