@@ -43,8 +43,10 @@
    القواعد التلقائية داخل ميتا ما تنعمل من الموصّل. تنضاف يدوياً من Ads Manager ← Rules، أو نطبقها بالمراجعة الدورية.
 
 ## الناقص قبل التشغيل
-- [ ] **رابط Calendly** (مثلاً `calendly.com/suitiee/free-audit`) مع UTM:
-      `?utm_source=meta&utm_medium=paid&utm_campaign={{campaign.name}}&utm_content={{ad.name}}`
+- [x] **رابط Calendly:** `https://calendly.com/business-clean-basket/30min`
+      الرابط اللي ينحط في الإعلانات (Calendly يلتقط الـ UTM ويحفظها مع كل حجز):
+      `https://calendly.com/business-clean-basket/30min?utm_source=instagram&utm_medium=paid&utm_campaign={{campaign.name}}&utm_content={{ad.name}}`
+- [ ] **اسم الحدث والرابط يظهرون باسم Clean Basket.** المالك بيشوف "business-clean-basket" واسم الحساب. الأفضل: حدث باسم "فحص مجاني لشقتك – سويتي" ورابط مختصر `calendly.com/suitiee/...`
 - [ ] ربط **Meta Pixel `1308075597982037`** داخل Calendly (Integrations ← Meta Pixel، يحتاج باقة مدفوعة)، وتأكيد وصول حدث الحجز
 - [ ] أسئلة Calendly: الحي، عدد الغرف، المنصات، تديرها بنفسك ولا مع شركة، رابط الإعلان
 - [ ] الفيديوهات (أفضل ٣ عضوية) ← الإعلانات: ٣ لكل مجموعة (هوك A/B/C)
