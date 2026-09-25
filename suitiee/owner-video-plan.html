@@ -1,0 +1,612 @@
+<title>Suitiee Owner Video Plan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Readex+Pro:wght@400;500;600;700&family=IBM+Plex+Sans+Arabic:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --bg:#F5F6F3; --surface:#FFFFFF; --sunk:#ECEEEA; --ink:#1B2226; --muted:#5A6568; --line:#D8DDD8;
+  --accent:#0E6B63; --accent-soft:#DCEDEA; --gold:#B7860F; --gold-soft:#F6ECCF;
+  --warn:#9A4A12; --warn-soft:#F8E6D6; --ph:#7A3E8C; --ph-soft:#F1E4F5;
+  --display:"Readex Pro","IBM Plex Sans Arabic",system-ui,sans-serif;
+  --body:"IBM Plex Sans Arabic","Readex Pro",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#121719; --surface:#1A2124; --sunk:#222A2D; --ink:#E7ECEA; --muted:#9AA7A8; --line:#2F393C;
+    --accent:#4FC1B3; --accent-soft:#17332F; --gold:#E2B64A; --gold-soft:#342C15;
+    --warn:#F0A36A; --warn-soft:#3A2618; --ph:#D59BE6; --ph-soft:#33243A;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#121719; --surface:#1A2124; --sunk:#222A2D; --ink:#E7ECEA; --muted:#9AA7A8; --line:#2F393C;
+  --accent:#4FC1B3; --accent-soft:#17332F; --gold:#E2B64A; --gold-soft:#342C15;
+  --warn:#F0A36A; --warn-soft:#3A2618; --ph:#D59BE6; --ph-soft:#33243A;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:15.5px;line-height:1.6;padding-inline:16px;padding-block:0 64px}
+.wrap{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:220px minmax(0,1fr);gap:48px}
+@media (max-width:900px){.wrap{grid-template-columns:minmax(0,1fr);gap:0}}
+nav.toc{position:sticky;top:env(safe-area-inset-top,0px);align-self:start;padding-block:32px;max-height:100vh;overflow:auto}
+nav.toc p{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:0 0 10px}
+nav.toc ol{list-style:none;margin:0;padding:0;display:grid;gap:2px;counter-reset:t}
+nav.toc a{display:block;padding:5px 10px;border-radius:6px;color:var(--ink);text-decoration:none;font-size:13.5px}
+nav.toc a:hover,nav.toc a:focus-visible{background:var(--accent-soft);color:var(--accent);outline:none}
+@media (max-width:900px){
+  nav.toc{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);padding-block:10px;border-bottom:1px solid var(--line);max-height:none}
+  nav.toc p{display:none}
+  nav.toc ol{display:flex;overflow-x:auto;gap:4px;scrollbar-width:none}
+  nav.toc a{white-space:nowrap;background:var(--surface);border:1px solid var(--line)}
+}
+main{min-width:0;padding-block:32px}
+header.hero{padding-block:8px 28px;border-bottom:1px solid var(--line);margin-bottom:8px}
+.eyebrow{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);font-weight:600}
+h1{font-family:var(--display);font-weight:700;font-size:clamp(28px,4.4vw,44px);line-height:1.12;margin:8px 0 14px;text-wrap:balance;letter-spacing:-.01em}
+h1 .ar{display:block;font-size:.62em;color:var(--muted);font-weight:500;margin-top:6px}
+.thesis{font-size:18px;max-width:62ch;margin:0 0 20px}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:0;padding:0}
+.facts div{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:10px 12px}
+.facts dt{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.facts dd{margin:2px 0 0;font-weight:600;font-size:14.5px}
+section{padding-block:36px 8px;scroll-margin-top:64px}
+h2{font-family:var(--display);font-weight:600;font-size:24px;margin:0 0 6px;text-wrap:balance;display:flex;gap:12px;align-items:baseline}
+h2 .n{font-family:var(--mono);font-size:13px;color:var(--accent);font-weight:500}
+h3{font-family:var(--display);font-weight:600;font-size:17px;margin:22px 0 8px}
+.lede{color:var(--muted);max-width:68ch;margin:0 0 16px}
+p,li{max-width:72ch}
+.tbl{overflow-x:auto;border:1px solid var(--line);border-radius:8px;background:var(--surface);margin-block:12px}
+table{border-collapse:collapse;width:100%;font-size:14px}
+th,td{text-align:start;vertical-align:top;padding:9px 12px;border-bottom:1px solid var(--line)}
+th{font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:600;background:var(--sunk)}
+tr:last-child td{border-bottom:0}
+td.num,.mono{font-family:var(--mono);font-variant-numeric:tabular-nums;font-size:13px}
+.ar{font-family:var(--body)}
+[dir="rtl"]{text-align:right}
+.ph{font-family:var(--mono);font-size:.82em;background:var(--ph-soft);color:var(--ph);padding:1px 6px;border-radius:4px;white-space:nowrap;unicode-bidi:isolate;direction:ltr}
+.kw{display:inline-block;font-weight:600;background:var(--gold-soft);color:var(--gold);padding:1px 9px;border-radius:999px;font-size:.92em}
+.note{border-inline-start:3px solid var(--warn);background:var(--warn-soft);padding:12px 16px;border-radius:0 8px 8px 0;margin-block:14px;max-width:78ch}
+[dir="rtl"].note{border-radius:8px 0 0 8px}
+.note strong{color:var(--warn)}
+.quote{font-family:var(--display);font-size:19px;border-inline-start:3px solid var(--accent);padding:4px 0 4px 16px;margin:16px 0;max-width:62ch}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px}
+.box{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:14px 16px}
+.box h4{margin:0 0 6px;font-family:var(--display);font-size:15px}
+.box p{margin:0;font-size:14.5px}
+.flow{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-block:14px;list-style:none;padding:0}
+.flow li{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:8px 12px;font-size:13.5px;max-width:none}
+.flow li:not(:last-child)::after{content:"→";margin-inline-start:10px;color:var(--accent)}
+.copylist{display:grid;gap:8px;margin-block:10px;padding:0;list-style:none}
+.copylist li{display:flex;gap:10px;align-items:center;justify-content:space-between;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:10px 12px;max-width:none}
+.copylist .txt{flex:1;min-width:0}
+.copylist .cnt{font-family:var(--mono);font-size:11.5px;color:var(--muted)}
+button.copy{font:inherit;font-size:12.5px;border:1px solid var(--line);background:var(--sunk);color:var(--ink);border-radius:6px;padding:5px 10px;cursor:pointer;white-space:nowrap}
+button.copy:hover{border-color:var(--accent);color:var(--accent)}
+button.copy:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.dm{white-space:pre-line;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:14px 16px;max-width:62ch}
+/* scripts */
+.filters{display:flex;flex-wrap:wrap;gap:6px;margin-block:12px}
+.filters button{font:inherit;font-size:13px;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;padding:5px 12px;cursor:pointer}
+.filters button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--bg)}
+.filters button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+article.script{background:var(--surface);border:1px solid var(--line);border-radius:10px;margin-block:14px;overflow:hidden}
+article.script>header{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:baseline;padding:14px 16px;border-bottom:1px solid var(--line)}
+article.script .vid{font-family:var(--mono);font-weight:500;color:var(--accent);font-size:14px}
+article.script h3{margin:0;font-size:17px}
+article.script .meta{display:flex;flex-wrap:wrap;gap:6px;width:100%;font-size:12.5px;color:var(--muted)}
+article.script .meta span{background:var(--sunk);border-radius:4px;padding:1px 8px}
+.beats{list-style:none;margin:0;padding:0}
+.beats li{display:grid;grid-template-columns:64px 92px minmax(0,1fr);gap:12px;padding:10px 16px;border-bottom:1px solid var(--line);max-width:none;align-items:start}
+.beats li:last-child{border-bottom:0}
+.beats .t{font-family:var(--mono);font-size:12.5px;color:var(--muted);padding-top:2px}
+.beats .b{font-size:11px;letter-spacing:.08em;text-transform:uppercase;font-weight:600;color:var(--ink);padding-top:3px}
+.beats li.hook .b{color:var(--accent)} .beats li.cta .b{color:var(--gold)} .beats li.ins .b{color:var(--ph)}
+.beats .c{display:grid;gap:3px}
+.beats .c .v,.beats .c .s{font-size:13px;color:var(--muted)}
+.beats .c .say{font-size:16px;line-height:1.7}
+.beats .c .say::before{content:"🗣 ";font-size:12px}
+.beats .c .s::before{content:"On screen: ";font-weight:600;color:var(--ink)}
+.beats .c .v::before{content:"Shot: ";font-weight:600;color:var(--ink)}
+@media (max-width:560px){.beats li{grid-template-columns:1fr;gap:2px}.beats .t,.beats .b{padding-top:0}.beats .b{order:-1}}
+.extra{padding:12px 16px;border-top:1px solid var(--line);background:var(--sunk);font-size:14px;display:grid;gap:6px}
+.extra b{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.checklist{list-style:none;padding:0;display:grid;gap:6px}
+.checklist li{display:flex;gap:10px;align-items:flex-start}
+.checklist input{margin-top:5px;accent-color:var(--accent);width:16px;height:16px}
+footer{margin-top:48px;padding-top:16px;border-top:1px solid var(--line);color:var(--muted);font-size:13px}
+a{color:var(--accent)}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+</style>
+
+<div class="wrap">
+<nav class="toc" aria-label="Sections">
+  <p>Contents</p>
+  <ol>
+    <li><a href="#strategy">Strategy</a></li>
+    <li><a href="#kpis">KPIs</a></li>
+    <li><a href="#personas">Owners</a></li>
+    <li><a href="#offer">Offer</a></li>
+    <li><a href="#proof">Proof sheet</a></li>
+    <li><a href="#algorithm">Algorithm</a></li>
+    <li><a href="#structure">Video structure</a></li>
+    <li><a href="#language">Arabic guide</a></li>
+    <li><a href="#funnel">Keyword funnel</a></li>
+    <li><a href="#calendar">Calendar</a></li>
+    <li><a href="#scripts">Scripts</a></li>
+    <li><a href="#paid">Paid plan</a></li>
+    <li><a href="#review">Weekly review</a></li>
+    <li><a href="#production">Production</a></li>
+    <li><a href="#avoid">Avoid list</a></li>
+  </ol>
+</nav>
+
+<main>
+<header class="hero" id="strategy">
+  <div class="eyebrow">Suitiee · @suitiee.sa · Riyadh</div>
+  <h1>30-day owner video plan<span class="ar" lang="ar" dir="rtl">خطة فيديوهات ملاك الشقق – ٣٠ يوم</span></h1>
+  <p class="thesis">Show Riyadh owners the gap between what their apartment earns now and what it could earn with Suitiee. Prove it with our own numbers and behind-the-scenes footage, and turn every video into a lead with one comment keyword.</p>
+  <dl class="facts">
+    <div><dt>Audience</dt><dd>Property owners</dd></div>
+    <div><dt>Platforms</dt><dd>TikTok + IG Reels</dd></div>
+    <div><dt>Volume</dt><dd>14 videos · 3–4 / week</dd></div>
+    <div><dt>Presenter</dt><dd>Saudi male, white dialect</dd></div>
+    <div><dt>Paid budget</dt><dd>6,000 SAR (range 3–10k)</dd></div>
+  </dl>
+  <p class="lede" style="margin-top:16px">Structure borrowed from our reference lead-magnet docs: <strong>big promise → numbered steps → one key insight → one clear action</strong>. Every script ends with a reframe line ("المهم مو…، المهم…") because that's the line people share.</p>
+</header>
+
+<section id="kpis">
+  <h2><span class="n">01</span>Objective and KPIs</h2>
+  <p class="lede">Views are a diagnostic, not a goal. A video with 8,000 views and 12 owner comments beats one with 200,000 views and none.</p>
+  <div class="tbl"><table>
+    <thead><tr><th>Level</th><th>Metric</th><th>Target (30 days)</th><th>Where to read it</th></tr></thead>
+    <tbody>
+      <tr><td>North Star</td><td><strong>Qualified owner leads</strong> (owner with a Riyadh unit, reached on WhatsApp or a call)</td><td><span class="ph">target_leads</span> suggest 40–60</td><td>CRM / WhatsApp log</td></tr>
+      <tr><td>Business</td><td>Signed units</td><td><span class="ph">target_units</span> suggest 5–8</td><td>CRM</td></tr>
+      <tr><td>Funnel</td><td>Keyword comments → DMs opened</td><td class="num">≥ 60%</td><td>TikTok Business Suite inbox</td></tr>
+      <tr><td>Funnel</td><td>DM → WhatsApp / call booked</td><td class="num">≥ 30%</td><td>CRM</td></tr>
+      <tr><td>Creative</td><td>3-second hold (hook rate)</td><td class="num">≥ 35%</td><td>TikTok analytics / IG insights</td></tr>
+      <tr><td>Creative</td><td>Average watch %</td><td class="num">≥ 40% on 35–50s</td><td>same</td></tr>
+      <tr><td>Creative</td><td>Shares + saves per 1,000 views</td><td class="num">≥ 8</td><td>same</td></tr>
+      <tr><td>Paid</td><td>Cost per qualified lead</td><td><span class="ph">target_cpl</span> set after week 2</td><td>Ads Manager + CRM</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section id="personas">
+  <h2><span class="n">02</span>Who we're talking to</h2>
+  <p class="lede">A and B convert fastest, so 70% of the calendar targets them.</p>
+  <div class="grid2">
+    <div class="box"><h4>A · The annual-lease owner</h4><p>Unit rented yearly, income flat. <em>"My income hasn't moved in years."</em> Needs the money math: annual vs short-term.</p></div>
+    <div class="box"><h4>B · The DIY host</h4><p>Already on Airbnb / Gathern / Booking, runs it alone. 3am messages, no-show cleaners, flat pricing. Needs "keep the income, drop the headache", via full management or channel manager only.</p></div>
+    <div class="box"><h4>C · The new-unit owner</h4><p>Just received a unit (often north Riyadh). Unsure whether to rent it yearly, rent it short-term or sell. Needs a clear first step.</p></div>
+    <div class="box"><h4>D · The multi-unit investor</h4><p>3+ units, spreadsheets. Needs reporting, occupancy numbers and hands-off operations.</p></div>
+  </div>
+</section>
+
+<section id="offer">
+  <h2><span class="n">03</span>The offer: two doors, one CTA</h2>
+  <div class="grid2">
+    <div class="box"><h4 lang="ar" dir="rtl">١) إدارة كاملة · Full management</h4><p>Listing, pricing, guest messages, check-in, cleaning, maintenance coordination, owner reports. Fee: <span class="ph">commission_%</span></p></div>
+    <div class="box"><h4 lang="ar" dir="rtl">٢) إدارة القنوات · Channel manager only</h4><p>We list and sync across Airbnb / Gathern / Booking, run dynamic pricing and optimize the listing. The owner runs operations. Fee: <span class="ph">channel_fee</span></p></div>
+  </div>
+  <p>Videos never go deep on pricing. They sell the result and the relief, then send people to the keyword. Pricing is discussed in the DM or on the call.</p>
+</section>
+
+<section id="proof">
+  <h2><span class="n">04</span>Proof sheet: fill before filming</h2>
+  <div class="note"><strong>Don't film a script until its numbers are confirmed.</strong> Every <span class="ph">purple tag</span> on this page comes from this table, filled from suitiee.com. Unverifiable claims are a legal risk in Saudi ads and destroy trust in the comments.</div>
+  <div class="tbl"><table>
+    <thead><tr><th>Key</th><th>What to fill</th><th>Example format</th><th>Value</th></tr></thead>
+    <tbody>
+      <tr><td><span class="ph">units_managed</span></td><td>Units currently managed</td><td lang="ar">+١٢٠ وحدة</td><td></td></tr>
+      <tr><td><span class="ph">years</span></td><td>Years operating / since</td><td lang="ar">من ٢٠٢٢</td><td></td></tr>
+      <tr><td><span class="ph">avg_occupancy</span></td><td>Average occupancy % (last 6–12 months)</td><td lang="ar">٧٨٪</td><td></td></tr>
+      <tr><td><span class="ph">uplift_%</span></td><td>Average income uplift vs annual lease</td><td lang="ar">٤٠٪ أكثر</td><td></td></tr>
+      <tr><td><span class="ph">example_unit</span></td><td>One real unit: type + district</td><td lang="ar">شقة غرفتين – حي الملقا</td><td></td></tr>
+      <tr><td><span class="ph">annual_rent</span></td><td>That unit's annual lease value before</td><td lang="ar">٤٥ ألف</td><td></td></tr>
+      <tr><td><span class="ph">st_income</span></td><td>That unit's yearly short-term income with Suitiee</td><td lang="ar">٧٢ ألف</td><td></td></tr>
+      <tr><td><span class="ph">rating</span></td><td>Average guest rating across platforms</td><td lang="ar">٤٫٨</td><td></td></tr>
+      <tr><td><span class="ph">turnover_time</span></td><td>Checkout → next check-in ready</td><td lang="ar">ساعتين</td><td></td></tr>
+      <tr><td><span class="ph">response_time</span></td><td>Average guest response time</td><td lang="ar">أقل من ٥ دقايق</td><td></td></tr>
+      <tr><td><span class="ph">commission_%</span></td><td>Full management fee</td><td></td><td></td></tr>
+      <tr><td><span class="ph">channel_fee</span></td><td>Channel-manager-only fee</td><td></td><td></td></tr>
+      <tr><td><span class="ph">owner_name</span></td><td>Owner willing to appear (testimonial)</td><td></td><td></td></tr>
+      <tr><td><span class="ph">licensing</span></td><td>Do we handle the Ministry of Tourism short-term rental permit? (yes/no)</td><td></td><td></td></tr>
+      <tr><td><span class="ph">damage_policy</span></td><td>What happens if a guest damages something (deposit / insurance / guarantee)</td><td></td><td></td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section id="algorithm">
+  <h2><span class="n">05</span>Algorithm playbook</h2>
+  <h3>What both platforms reward</h3>
+  <ol>
+    <li><strong>The first 1–2 seconds.</strong> Visual hook, on-screen text and spoken hook all start at frame 1. No logo intro and no "السلام عليكم، معكم…".</li>
+    <li><strong>Watch time.</strong> Aim for 30–50 seconds and cut every pause (jump cuts every 2–4s).</li>
+    <li><strong>Rewatches.</strong> End on a line that loops back to the opening, or on a number that makes people scroll back.</li>
+    <li><strong>Comments.</strong> The keyword CTA is also a ranking signal, because every <span class="kw" lang="ar">تم</span> counts as a comment.</li>
+    <li><strong>Shares and sends.</strong> On Instagram, sends per reach is one of the strongest signals. Give owners a reason to forward it: <span lang="ar">"أرسلها لأخوك اللي عنده شقة"</span>.</li>
+    <li><strong>Search.</strong> TikTok works as a search engine in KSA. Say the keywords out loud (auto-captions are indexed) and put them on screen and in the caption: <span lang="ar" dir="rtl">إدارة شقق الرياض، تأجير يومي، جاذر إن، إير بي إن بي، دخل الشقة، إيجار سنوي</span>.</li>
+  </ol>
+  <div class="grid2">
+    <div class="box"><h4>TikTok</h4><p>Post natively. Put a trending low-volume sound under the voice at 10–15%. Ad cuts use the <strong>Commercial Music Library</strong> only. Use 3–5 hashtags: <span lang="ar">#الرياض #تأجير_يومي #إدارة_أملاك #سويتي</span>. Pin a keyword comment on every video. Reply to comments with video. Don't delete low performers in the first 72h, because TikTok often picks videos up again days later.</p></div>
+    <div class="box"><h4>Instagram Reels</h4><p><strong>Never upload the file with the TikTok watermark.</strong> Export a clean master. Test hooks with <strong>Trial Reels</strong>. Keep text out of the bottom 20% and the right 15%. Start the caption with the hook and the keyword CTA, then 3–5 hashtags. Share every Reel to Stories with a poll: <span lang="ar">"عندك شقة مؤجرة سنوي؟ نعم / لا"</span>.</p></div>
+  </div>
+  <h3>Posting schedule (Riyadh time, check against your own analytics in week 2)</h3>
+  <div class="tbl"><table>
+    <thead><tr><th>Day</th><th>Slot</th><th>Why</th></tr></thead>
+    <tbody>
+      <tr><td>Sun / Tue / Thu</td><td class="num">8:30–10:00 PM</td><td>After Isha, peak evening scroll</td></tr>
+      <tr><td>Sat</td><td class="num">1:00–3:00 PM</td><td>Weekend midday, when owners have time to think about money</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section id="structure">
+  <h2><span class="n">06</span>Master video structure</h2>
+  <p class="lede">Used for all 14 videos. Mirrors the reference docs: promise → numbered steps → key insight → action.</p>
+  <div class="tbl"><table>
+    <thead><tr><th>Time</th><th>Block</th><th>What happens</th><th>Rule</th></tr></thead>
+    <tbody>
+      <tr><td class="num">0–2s</td><td><strong>Hook</strong></td><td>Pattern interrupt + on-screen text + spoken line</td><td>Name the owner or their money in the first sentence</td></tr>
+      <tr><td class="num">2–7s</td><td><strong>Problem / promise</strong></td><td>The pain they feel + what they get by staying</td><td>One sentence each</td></tr>
+      <tr><td class="num">7–35s</td><td><strong>3 steps</strong></td><td>Numbered on screen: <span lang="ar">١ / ٢ / ٣</span></td><td>B-roll changes on every number</td></tr>
+      <tr><td class="num">35–42s</td><td><strong>Key insight</strong></td><td lang="ar" dir="rtl">"المهم مو …، المهم …"</td><td>The shareable line</td></tr>
+      <tr><td class="num">42–50s</td><td><strong>CTA</strong></td><td lang="ar" dir="rtl">"اكتب <b>{keyword}</b> بالتعليقات وأرسل لك التفاصيل على الخاص"</td><td>Keyword also on screen, big</td></tr>
+    </tbody>
+  </table></div>
+  <h3>Ad-ready rules for every shoot</h3>
+  <ul>
+    <li>Film <strong>3 alternative hooks</strong> per video (same body). These become the A/B/C ad variants.</li>
+    <li>Film the CTA twice: <span lang="ar">"اكتب تم بالتعليقات"</span> (organic) and <span lang="ar">"اضغط الزر تحت وكلمنا واتساب"</span> (ads).</li>
+    <li>Keep 5–10 seconds of clean B-roll per video (apartment, keys, app screen).</li>
+    <li>Burn in Arabic subtitles <strong>in dialect, exactly as spoken</strong>, not in formal Arabic (MSA).</li>
+  </ul>
+</section>
+
+<section id="language">
+  <h2><span class="n">07</span>Arabic guide: so it doesn't sound odd</h2>
+  <p class="lede">The biggest risk is a script that sounds translated or read off a page.</p>
+  <div class="grid2">
+    <div class="box"><h4>Do</h4><p>Talk like you're explaining it to a cousin at a jalsa: short sentences, one idea each. Use fillers sparingly (<span lang="ar">بصراحة، شوف، خلني أقولك، والله، يعني</span>). Round numbers in speech (<span lang="ar">"قرابة ٧٠ ألف"</span>). Say platform names the way people say them: <span lang="ar">إير بي إن بي، جاذر إن، بوكينق</span>. Film in real places.</p></div>
+    <div class="box"><h4>Delivery</h4><p>The presenter learns the <strong>points</strong>, not the words. Film each block separately and cut them together, with no full-script teleprompter. Aim for calm confidence, like a friend who knows the numbers. Wear a thobe (and shemagh on some videos). Smart casual works for behind-the-scenes days.</p></div>
+  </div>
+  <div class="tbl"><table>
+    <thead><tr><th>❌ Sounds odd / translated</th><th>✅ Say instead</th></tr></thead>
+    <tbody lang="ar" dir="rtl">
+      <tr><td>هل تمتلك شقة؟</td><td>عندك شقة؟</td></tr>
+      <tr><td>نحن نقدم خدمات إدارة العقارات</td><td>إحنا نشيل عنك الشقة من الألف للياء</td></tr>
+      <tr><td>قم بكتابة كلمة تم</td><td>اكتب "تم" بالتعليقات</td></tr>
+      <tr><td>سوف تحصل على دخل أعلى</td><td>دخلك بيزيد، وبالأرقام</td></tr>
+      <tr><td>عزيزي المالك</td><td>يا صاحب الشقة / إذا عندك شقة</td></tr>
+      <tr><td>نحن الأفضل في السوق</td><td>خلني أوريك الأرقام وأنت احكم</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section id="funnel">
+  <h2><span class="n">08</span>Comment-keyword funnel</h2>
+  <p class="lede">Plugs into our TikTok reply tool. The tool posts one public reply, and TikTok's native keyword auto-reply sends the details by DM.</p>
+  <ol class="flow">
+    <li>Video with keyword CTA</li>
+    <li>Owner comments keyword</li>
+    <li>Tool posts 1 public reply (≤150 chars)</li>
+    <li>Owner DMs → native auto-reply</li>
+    <li>WhatsApp / call</li>
+    <li>Unit assessment → signed</li>
+  </ol>
+  <div class="note"><strong>"تم" is a very common word in comments</strong> (<span lang="ar">"تم المتابعة"، "تم 👍"</span>). If the tool matches any comment that <em>contains</em> it, it will reply to people who aren't leads. Either match only when the <strong>whole comment</strong> is the keyword, or use a <strong>different keyword per video</strong> (below). Per-video keywords also show which video brought each lead.</div>
+  <div class="note"><strong>Switch the reply rule ON before publishing.</strong> The tool only answers comments posted after the rule is on. Turn it on late and you lose the first hour's comments, which are the most valuable.</div>
+  <div class="tbl"><table>
+    <thead><tr><th>Videos</th><th>Keyword</th></tr></thead>
+    <tbody>
+      <tr><td>V1, V14</td><td><span class="kw" lang="ar">دخل</span></td></tr>
+      <tr><td>V2</td><td><span class="kw" lang="ar">أمان</span></td></tr>
+      <tr><td>V3, V13</td><td><span class="kw" lang="ar">تم</span></td></tr>
+      <tr><td>V4, V11</td><td><span class="kw" lang="ar">قنوات</span></td></tr>
+      <tr><td>V5</td><td><span class="kw" lang="ar">تجربة</span></td></tr>
+      <tr><td>V6</td><td><span class="kw" lang="ar">سعر</span></td></tr>
+      <tr><td>V7, V10</td><td><span class="kw" lang="ar">شقتي</span></td></tr>
+      <tr><td>V8</td><td><span class="kw" lang="ar">تقرير</span></td></tr>
+      <tr><td>V9</td><td><span class="kw" lang="ar">جديدة</span></td></tr>
+      <tr><td>V12</td><td>Reuses the keyword of the original comment's video</td></tr>
+    </tbody>
+  </table></div>
+  <h3>Public reply variants (rotate them so replies don't look like spam)</h3>
+  <ul class="copylist" id="replies"></ul>
+  <h3>TikTok native DM auto-reply (Business Suite)</h3>
+  <div class="dm" lang="ar" dir="rtl" id="dmtext">هلا والله 👋 شكراً لتواصلك مع سويتي.
+عشان نحسب لك الدخل المتوقع لشقتك، أرسل لنا:
+١) الحي ٢) عدد الغرف ٣) هل الشقة مفروشة؟
+أو كلمنا مباشرة واتساب: [رابط الواتساب]
+تقدر تشوف أعمالنا هنا: suitiee.com</div>
+  <p><button class="copy" type="button" data-copy-target="dmtext">Copy DM text</button></p>
+  <p><strong>Instagram:</strong> our tool is TikTok-only. Set up Meta's built-in automated responses / comment-to-DM (or ManyChat) with the same keywords and DM text, so owners get the same experience on both platforms.</p>
+</section>
+
+<section id="calendar">
+  <h2><span class="n">09</span>30-day calendar</h2>
+  <p class="lede">Pillar mix: Money math 30% · Fears & myths 20% · Behind the scenes 20% · Education 15% · Proof & community 15%. Keep 1 open slot a week for a trend, a news item or a remake of the week's winner.</p>
+  <div class="tbl"><table>
+    <thead><tr><th>Week</th><th>Day</th><th>#</th><th>Working title</th><th>Persona</th><th>Pillar</th><th>Keyword</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>Sun</td><td class="num">V1</td><td lang="ar" dir="rtl">شقتك مؤجرة سنوي؟ شوف الفرق</td><td>A</td><td>Money</td><td><span class="kw" lang="ar">دخل</span></td></tr>
+      <tr><td>1</td><td>Tue</td><td class="num">V2</td><td lang="ar" dir="rtl">أكبر خوف عند أي مالك</td><td>A</td><td>Fears</td><td><span class="kw" lang="ar">أمان</span></td></tr>
+      <tr><td>1</td><td>Thu</td><td class="num">V3</td><td lang="ar" dir="rtl">وش يصير في شقتك بين ضيف وضيف</td><td>A/B</td><td>Behind the scenes</td><td><span class="kw" lang="ar">تم</span></td></tr>
+      <tr><td>1</td><td>Sat</td><td class="num">V4</td><td lang="ar" dir="rtl">٣ أخطاء تقص دخلك على جاذر إن</td><td>B</td><td>Education</td><td><span class="kw" lang="ar">قنوات</span></td></tr>
+      <tr><td>2</td><td>Sun</td><td class="num">V5</td><td lang="ar" dir="rtl">مالك يحكي تجربته</td><td>A</td><td>Proof</td><td><span class="kw" lang="ar">تجربة</span></td></tr>
+      <tr><td>2</td><td>Tue</td><td class="num">V6</td><td lang="ar" dir="rtl">ليش سعر شقتك لازم يتغير كل يوم</td><td>B</td><td>Money</td><td><span class="kw" lang="ar">سعر</span></td></tr>
+      <tr><td>2</td><td>Thu</td><td class="num">V7</td><td lang="ar" dir="rtl">الإيجار اليومي تعب؟ صح… إذا…</td><td>A</td><td>Fears</td><td><span class="kw" lang="ar">شقتي</span></td></tr>
+      <tr><td>3</td><td>Sun</td><td class="num">V8</td><td lang="ar" dir="rtl">وش يوصل المالك آخر كل شهر</td><td>D</td><td>Behind the scenes</td><td><span class="kw" lang="ar">تقرير</span></td></tr>
+      <tr><td>3</td><td>Tue</td><td class="num">V9</td><td lang="ar" dir="rtl">استلمت شقتك الجديدة؟ لا تأجرها قبل…</td><td>C</td><td>Proof / education</td><td><span class="kw" lang="ar">جديدة</span></td></tr>
+      <tr><td>3</td><td>Thu</td><td class="num">V10</td><td lang="ar" dir="rtl">كل ليلة فاضية = فلوس طايرة</td><td>A/D</td><td>Money</td><td><span class="kw" lang="ar">شقتي</span></td></tr>
+      <tr><td>3</td><td>Sat</td><td class="num">V11</td><td lang="ar" dir="rtl">نشتغل مع الملاك بطريقتين</td><td>B</td><td>Education</td><td><span class="kw" lang="ar">قنوات</span></td></tr>
+      <tr><td>4</td><td>Sun</td><td class="num">V12</td><td>Reply-to-comment video (top question)</td><td>All</td><td>Community</td><td>original</td></tr>
+      <tr><td>4</td><td>Tue</td><td class="num">V13</td><td lang="ar" dir="rtl">٢٤ ساعة مع فريق سويتي</td><td>All</td><td>Behind the scenes</td><td><span class="kw" lang="ar">تم</span></td></tr>
+      <tr><td>4</td><td>Thu</td><td class="num">V14</td><td lang="ar" dir="rtl">قبل ما يبدأ الموسم…</td><td>A</td><td>Money / urgency</td><td><span class="kw" lang="ar">دخل</span></td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section id="scripts">
+  <h2><span class="n">10</span>Scripts</h2>
+  <p class="lede">White Saudi dialect. Purple tags come from the proof sheet. Learn the points and film block by block.</p>
+  <div class="filters" role="group" aria-label="Filter scripts by week">
+    <button type="button" data-week="all" aria-pressed="true">All</button>
+    <button type="button" data-week="1" aria-pressed="false">Week 1</button>
+    <button type="button" data-week="2" aria-pressed="false">Week 2</button>
+    <button type="button" data-week="3" aria-pressed="false">Week 3</button>
+    <button type="button" data-week="4" aria-pressed="false">Week 4</button>
+  </div>
+  <div id="scriptlist"></div>
+</section>
+
+<section id="paid">
+  <h2><span class="n">11</span>Paid amplification</h2>
+  <p class="lede">Don't make ads, promote winners. Organic tells us what works for free, and money only goes behind creative that has already proven itself. Baseline 6,000 SAR, range 3–10k.</p>
+  <div class="tbl"><table>
+    <thead><tr><th>Phase</th><th>Days</th><th>Spend</th><th>Action</th></tr></thead>
+    <tbody>
+      <tr><td>0 · Setup</td><td class="num">1–3</td><td class="num">0</td><td>TikTok + Meta Pixel on suitiee.com, lead form, WhatsApp Business link, Spark Ads codes on every organic post</td></tr>
+      <tr><td>1 · Organic test</td><td class="num">1–14</td><td class="num">0</td><td>Post V1–V7; measure hook rate, watch % and keyword comments</td></tr>
+      <tr><td>2 · Creative test</td><td class="num">10–20</td><td class="num">~2,000 SAR</td><td>Top 3 videos × 3 hooks = 9 ads, ~220 SAR each</td></tr>
+      <tr><td>3 · Scale</td><td class="num">18–30</td><td class="num">~3,500 SAR</td><td>Budget behind the 2 best ads by cost per qualified lead</td></tr>
+      <tr><td>4 · Retarget</td><td class="num">18–30</td><td class="num">~500 SAR</td><td>50%+ viewers and profile visitors see V5 (testimonial) + V8 (report)</td></tr>
+    </tbody>
+  </table></div>
+  <div class="tbl"><table>
+    <thead><tr><th></th><th>TikTok (≈55%)</th><th>Meta: IG Reels + FB (≈45%)</th></tr></thead>
+    <tbody>
+      <tr><td>Format</td><td><strong>Spark Ads</strong> (keeps likes, comments, profile)</td><td>Promote the organic Reel by its post ID</td></tr>
+      <tr><td>Objective</td><td>Lead gen (instant form) or Messages → WhatsApp</td><td><strong>Click-to-WhatsApp</strong> (very strong in KSA) or Leads</td></tr>
+      <tr><td>Location</td><td colspan="2">Riyadh (+ optional: Saudis in Jeddah / Eastern Province who own Riyadh units)</td></tr>
+      <tr><td>Age</td><td colspan="2" class="num">27–60</td></tr>
+      <tr><td>Targeting</td><td>Broad + interests: real estate, investment, Airbnb</td><td>Broad (Advantage+). Let the creative do the targeting</td></tr>
+    </tbody>
+  </table></div>
+  <p><strong>Lead form questions:</strong> <span lang="ar">الحي · عدد الغرف · الشقة حالياً (فاضية / مؤجرة سنوي / يومي) · مفروشة؟ · رقم الجوال</span></p>
+  <h3>Kill and scale rules (check every 48h)</h3>
+  <ul>
+    <li>Hook rate &lt; 25% after 2,000 impressions → <strong>kill the hook</strong>, keep the body, test a new hook.</li>
+    <li>Cost per lead &gt; 2× target after 150 SAR spend → <strong>pause</strong>.</li>
+    <li>Cost per lead ≤ target for 3 days → <strong>+20% budget</strong> every 48h. Bigger jumps restart the platform's learning phase.</li>
+    <li>Frequency &gt; 3 on retargeting → rotate the creative.</li>
+  </ul>
+  <div class="note"><strong>Compliance (KSA).</strong> Numbers in ads must match the proof sheet. If the presenter is <em>not</em> a Suitiee employee, check whether they need a <strong>Mawthooq</strong> advertiser license before their face runs in paid ads. Only mention licensing if <span class="ph">licensing</span> = yes.</div>
+</section>
+
+<section id="review">
+  <h2><span class="n">12</span>Weekly review, every Saturday (30 min)</h2>
+  <ol>
+    <li>Pull per video: views, 3s hold %, average watch %, shares, saves, <strong>keyword comments</strong>, DMs, leads, signed.</li>
+    <li>Rank by <strong>leads per 1,000 views</strong>, not by views.</li>
+    <li>Decide:
+      <ul>
+        <li><strong>Winner (top 2):</strong> remix it (same body, new hook) for next week and nominate it for ads.</li>
+        <li><strong>Good body, weak hook</strong> (watch % fine, 3s hold low): re-cut with an alt hook.</li>
+        <li><strong>Weak all round:</strong> drop the angle.</li>
+      </ul>
+    </li>
+    <li>Read the comments. The best questions become reply videos (like V12) and next month's scripts.</li>
+  </ol>
+</section>
+
+<section id="production">
+  <h2><span class="n">13</span>Production kit and checklist</h2>
+  <div class="grid2">
+    <div class="box"><h4>Kit</h4><p>A current phone shooting 4K 30fps · wireless lav mic · 1 LED light · small tripod · CapCut for Arabic subtitles (a Saudi team member checks every word).</p></div>
+    <div class="box"><h4>Batch filming</h4><p>Film 4–5 videos per half-day at 2 locations. <strong>Showcase apartment:</strong> V1, V2, V3, V10, V11. <strong>Ops room / car / new unit:</strong> V4, V6, V8, V9, V13.</p></div>
+  </div>
+  <h3>Per-video checklist</h3>
+  <ul class="checklist">
+    <li><input type="checkbox" id="c1"><label for="c1">Proof-sheet numbers confirmed</label></li>
+    <li><input type="checkbox" id="c2"><label for="c2">Main hook + 2 alt hooks filmed</label></li>
+    <li><input type="checkbox" id="c3"><label for="c3">Organic CTA + ad CTA filmed</label></li>
+    <li><input type="checkbox" id="c4"><label for="c4">5–10s clean B-roll</label></li>
+    <li><input type="checkbox" id="c5"><label for="c5">Vertical 9:16, text inside safe zones</label></li>
+    <li><input type="checkbox" id="c6"><label for="c6">Arabic subtitles in dialect, checked by a Saudi team member</label></li>
+    <li><input type="checkbox" id="c7"><label for="c7">Clean export (no watermark) for Instagram</label></li>
+    <li><input type="checkbox" id="c8"><label for="c8">Reply rule switched ON with this video's keyword before posting</label></li>
+    <li><input type="checkbox" id="c9"><label for="c9">Pinned comment with keyword instruction</label></li>
+    <li><input type="checkbox" id="c10"><label for="c10">Spark Ads code generated</label></li>
+  </ul>
+</section>
+
+<section id="avoid">
+  <h2><span class="n">14</span>What makes it look odd</h2>
+  <div class="tbl"><table>
+    <thead><tr><th>Problem</th><th>Fix</th></tr></thead>
+    <tbody>
+      <tr><td>Reading from a script, eyes moving left-right</td><td>Film in blocks and learn the points</td></tr>
+      <tr><td>Formal Arabic (MSA) or translated phrasing</td><td>Use the language table in section 07</td></tr>
+      <tr><td>Stock corporate music, logo intros</td><td>Cold open, voice first</td></tr>
+      <tr><td>Too many claims in one video</td><td>One video, one idea</td></tr>
+      <tr><td>The same public reply under every comment</td><td>Rotate the 5 variants</td></tr>
+      <tr><td lang="ar">"رابط في البايو" as the only CTA</td><td>The keyword comment is easier for viewers and also helps ranking</td></tr>
+      <tr><td>Over-polished ad look on organic</td><td>Organic stays phone-shot and native. Polish only the paid cut, and only if tests show it helps</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<footer>Suitiee CMO plan · Prepared September 2026 · Fill the proof sheet before filming.</footer>
+</main>
+</div>
+
+<script>
+(function(){
+  var P = function(k){ return '<span class="ph">'+k+'</span>'; };
+  var K = function(k){ return '<span class="kw">'+k+'</span>'; };
+  // Each beat: [time, block, spoken, onScreen, shot, cls]
+  var scripts = [
+    {id:"V1",week:1,title:"شقتك مؤجرة سنوي؟ شوف الفرق",meta:["Money math","~45s","Keyword: دخل","Inside "+P("example_unit")+" + phone calculator"],beats:[
+      ["0–2s","Hook","إذا شقتك مؤجرة سنوي… غالباً إنك تخسر فلوس وأنت ما تدري.","شقتك مؤجرة سنوي؟","Presenter holds the apartment key up to the lens","hook"],
+      ["2–7s","Problem","خلني أوريك مثال حقيقي من شقة نديرها في الرياض.","","",""],
+      ["7–15s","1 · Before","هذي الشقة كانت مؤجرة سنوي بـ "+P("annual_rent")+". رقم ثابت، ما يتحرك.","١) قبل","Calculator on screen",""],
+      ["15–25s","2 · After","حوّلناها لتأجير يومي على إير بي إن بي وجاذر إن، وصار دخلها قرابة "+P("st_income")+" بالسنة.","٢) بعد","Booking calendar B-roll",""],
+      ["25–35s","3 · Gap","يعني تقريباً "+P("uplift_%")+" زيادة… والمالك ولا رد على رسالة ضيف وحدة.","٣) الفرق","",""],
+      ["35–42s","Insight","بصراحة، المهم مو إنك تأجر يومي… المهم مين يديرها. لأن نفس الشقة ممكن تجيب أقل من السنوي لو انْدارت غلط.","","","ins"],
+      ["42–50s","CTA","تبي نحسب لك دخل شقتك المتوقع؟ اكتب "+K("دخل")+" بالتعليقات وأرسل لك التفاصيل.","اكتب \"دخل\"","","cta"]],
+      alt:["كم تجيب شقتك بالسنة؟ ٤٠؟ ٥٠؟ خلني أقولك كم ممكن تجيب.","هذا دخل نفس الشقة… بطريقتين. (two stacks of receipts side by side)"],
+      caption:"شقتك مؤجرة سنوي؟ هذا الفرق الحقيقي بين السنوي واليومي 👇 اكتب \"دخل\" ونحسب لك دخل شقتك #الرياض #تأجير_يومي #إدارة_أملاك #سويتي"},
+    {id:"V2",week:1,title:"أكبر خوف عند أي مالك",meta:["Fears","~45s","Keyword: أمان","Managed apartment, inspection in progress"],beats:[
+      ["0–2s","Hook","أكثر سؤال يجينا من الملاك: الضيوف بيخربون الشقة؟","الضيف بيخرب شقتي؟","Close-up: hand running along a sofa / checking a wall","hook"],
+      ["2–7s","Promise","سؤال في محله. خلني أقولك وش نسوي بالضبط عشان ما يصير.","","",""],
+      ["7–15s","1","ما يدخل أحد إلا بعد ما نتحقق من هويته وتقييماته.","١) نتحقق من كل ضيف","",""],
+      ["15–25s","2","بعد كل ضيف، فريقنا يفحص الشقة ويصورها. أي شي ناقص نعرفه بنفس اليوم.","٢) فحص بعد كل خروج","Staff taking photos with a checklist",""],
+      ["25–35s","3","ولو صار أي ضرر… "+P("damage_policy")+"، والمالك ما يتحمل شي. (adapt to the real policy)","٣) "+P("damage_policy"),"",""],
+      ["35–42s","Insight","الصراحة؟ الشقة المؤجرة سنوي ما تشوفها سنة كاملة. عندنا تنفحص بعد كل ضيف.","","","ins"],
+      ["42–50s","CTA","تبي تعرف كيف نحمي شقتك بالتفصيل؟ اكتب "+K("أمان")+" بالتعليقات.","اكتب \"أمان\"","","cta"]],
+      alt:["هذا اللي يصير في شقتك بعد ما يطلع الضيف…","مالك سألني: لو الضيف كسر شي، مين يدفع؟"]},
+    {id:"V3",week:1,title:"وش يصير في شقتك بين ضيف وضيف",meta:["Behind the scenes","~40s","Keyword: تم","Fast turnover montage + 2 lines to camera"],beats:[
+      ["0–2s","Hook","الضيف طلع الساعة ١٢، والضيف الجاي يوصل الساعة ٣.","الضيف طلع الساعة ١٢…","Door opens onto a messy room right after checkout","hook"],
+      ["2–7s","Promise","هذا اللي يصير بالنص.","","",""],
+      ["7–15s","1","","١) فحص وتصوير","Checklist, photos",""],
+      ["15–25s","2","","٢) تنظيف وتعقيم وتغيير المفارش","Timelapse, fresh linens, towel fold",""],
+      ["25–32s","3","","٣) لمسات الاستقبال","Welcome kit, coffee, smart-lock code set",""],
+      ["32–38s","Insight","كل هذا في "+P("turnover_time")+"… والمالك؟ يشوف التقرير بس.","","Face to camera","ins"],
+      ["38–45s","CTA","تبي شقتك تنْدار بنفس الطريقة؟ اكتب "+K("تم")+" وأرسل لك التفاصيل.","اكتب \"تم\"","","cta"]],
+      note:"Process footage (cleaning, bed making) keeps people watching to the end and gets rewatches."},
+    {id:"V4",week:1,title:"٣ أخطاء تقص دخلك على جاذر إن",meta:["Education · DIY hosts","~50s","Keyword: قنوات","Presenter with a phone/laptop showing a blurred listing"],beats:[
+      ["0–2s","Hook","إذا تدير شقتك بنفسك على جاذر إن أو إير بي إن بي… غالباً إنك تسوي واحد من هالأخطاء.","تدير شقتك بنفسك؟","","hook"],
+      ["2–7s","Promise","وكل واحد منها ياكل من دخلك كل شهر.","","",""],
+      ["7–17s","1","نفس السعر الخميس والأحد؟ الويكند والمواسم لها سعر، والأيام الهادية لها سعر.","١) سعر ثابت طول السنة","",""],
+      ["17–27s","2","أول شي يشوفه الضيف هو الصورة. صورة معتمة تنزل حجوزاتك قبل ما يقرأ الإعلان.","٢) صور بالجوال","",""],
+      ["27–37s","3","الضيف يرسل لثلاث شقق. اللي يرد أول، ياخذ الحجز. متوسط ردنا "+P("response_time")+".","٣) رد متأخر","",""],
+      ["37–44s","Insight","المهم مو إن شقتك موجودة بالمنصات… المهم إنها تطلع أول وتنحجز أول.","","","ins"],
+      ["44–52s","CTA","وحتى لو تبي تكمل تدير التشغيل بنفسك، نقدر نمسك لك المنصات والتسعير بس. اكتب "+K("قنوات")+" بالتعليقات.","اكتب \"قنوات\"","","cta"]]},
+    {id:"V5",week:2,title:"مالك يحكي تجربته",meta:["Proof · testimonial","~45s","Keyword: تجربة","Interview with "+P("owner_name")+", presenter off-camera"],beats:[
+      ["0–2s","Hook","The owner's strongest line first (e.g. \"ما توقعت الفرق يكون كذا\")","مالك شقة في "+P("district"),"","hook"],
+      ["2–10s","Before","Q: كيف كانت شقتك قبل سويتي؟","","",""],
+      ["10–22s","Switch","Q: وش اللي خلاك تجرب اليومي؟ / وش كان خوفك؟","","",""],
+      ["22–35s","After","Q: وش تغير؟ (numbers on screen if the owner agrees)","","",""],
+      ["35–42s","Insight","Owner: \"أهم شي… راحة البال\" (or whatever they actually say)","","","ins"],
+      ["42–48s","CTA","تبي تسمع تجارب ملاك ثانيين؟ اكتب "+K("تجربة")+".","","Presenter voiceover","cta"]],
+      note:"Don't script the owner's answers. Ask the questions and keep the best 3."},
+    {id:"V6",week:2,title:"ليش سعر شقتك لازم يتغير كل يوم",meta:["Money math","~45s","Keyword: سعر","Presenter by a screen/whiteboard with a calendar"],beats:[
+      ["0–2s","Hook","لو سعر شقتك نفسه كل يوم… أنت تخسر من الجهتين.","شقتك بنفس السعر كل يوم؟","","hook"],
+      ["2–7s","Problem","بالأيام الزحمة تبيع أرخص من السوق، وبالأيام الهادية تظل فاضية.","","",""],
+      ["7–17s","1","الخميس والجمعة الطلب أعلى، يعني السعر لازم يرتفع.","١) الويكند","",""],
+      ["17–27s","2","موسم الرياض، المعارض، الحفلات… الطلب على الشقق القريبة يطير.","٢) المواسم والفعاليات","",""],
+      ["27–35s","3","وبالأيام الهادية، سعر ذكي يخليها محجوزة بدل ما تنام فاضية.","٣) الأيام الهادية","",""],
+      ["35–42s","Insight","الشقة الفاضية ما ترجع لك الليلة اللي راحت. التسعير هو نص الشغل.","","","ins"],
+      ["42–50s","CTA","تبي نشوف كم المفروض يكون سعر شقتك؟ اكتب "+K("سعر")+".","اكتب \"سعر\"","","cta"]]},
+    {id:"V7",week:2,title:"الإيجار اليومي تعب؟ صح… إذا…",meta:["Myth vs reality","~40s","Keyword: شقتي","Phone buzzing at night, split screen"],beats:[
+      ["0–2s","Hook","يقولون الإيجار اليومي تعب… صح. إذا تديره بنفسك.","الإيجار اليومي تعب؟","Phone buzzing with notifications at night","hook"],
+      ["2–7s","Problem","رسايل الساعة ٢ الفجر، عامل نظافة ما جا، ضيف ضايع ما لقى المبنى…","","",""],
+      ["7–30s","1–2–3","One short line per point.","١) الرسايل ← علينا · ٢) النظافة ← علينا · ٣) الدخول والمفاتيح ← قفل ذكي وعلينا","",""],
+      ["30–37s","Insight","التعب مو في الإيجار اليومي… التعب في إنك تسويه لحالك.","","","ins"],
+      ["37–44s","CTA","اكتب "+K("شقتي")+" ونرسل لك كيف نشيلها عنك.","اكتب \"شقتي\"","","cta"]]},
+    {id:"V8",week:3,title:"وش يوصل المالك آخر كل شهر",meta:["Behind the scenes · investors","~40s","Keyword: تقرير","Screen recording of the owner report (blur private data)"],beats:[
+      ["0–2s","Hook","هذا اللي يوصل ملاكنا آخر كل شهر.","","Phone notification: \"تقرير شهر …\"","hook"],
+      ["2–30s","1–2–3","Walk through each section of the report.","١) الإشغال "+P("avg_occupancy")+" · ٢) الدخل بالتفصيل · ٣) المصاريف والتقييمات","",""],
+      ["30–37s","Insight","المالك ما يسأل وش صار بشقتي. يشوفه قدامه بالأرقام.","","","ins"],
+      ["37–44s","CTA","تبي تشوف نموذج تقرير كامل؟ اكتب "+K("تقرير")+".","اكتب \"تقرير\"","","cta"]]},
+    {id:"V9",week:3,title:"استلمت شقتك الجديدة؟ لا تأجرها قبل…",meta:["New owners","~45s","Keyword: جديدة","Empty new unit (north Riyadh), then a furnished unit"],beats:[
+      ["0–2s","Hook","استلمت شقتك الجديدة؟ لا تأجرها قبل ما تسمع هالثلاث نقاط.","استلمت شقتك الجديدة؟","Empty unit, echo","hook"],
+      ["7–35s","1–2–3","One line per point. Point 3 only if "+P("licensing")+" = yes: \"وإحنا نساعدك فيه\".","١) احسب الخيارين: سنوي ويومي · ٢) التأثيث يفرق بالسعر · ٣) الترخيص قبل التشغيل","",""],
+      ["35–42s","Insight","أول قرار تاخذه في الشقة، هو اللي يحدد دخلها لسنين.","","","ins"],
+      ["42–50s","CTA","اكتب "+K("جديدة")+" ونعطيك دراسة سريعة لشقتك.","اكتب \"جديدة\"","","cta"]]},
+    {id:"V10",week:3,title:"كل ليلة فاضية = فلوس طايرة",meta:["Money · occupancy","~40s","Keyword: شقتي","Calendar with empty nights crossed in red, then filled"],beats:[
+      ["0–2s","Hook","كل ليلة شقتك فاضية فيها… هذي فلوس ما ترجع.","الليلة الفاضية ما ترجع","","hook"],
+      ["2–30s","1–2–3","One line per point.","١) نعرضها في كل المنصات بنفس الوقت · ٢) التقويم متزامن، ما فيه حجز مكرر · ٣) تسعير يملأ الأيام الهادية","",""],
+      ["30–37s","Insight","متوسط الإشغال عندنا "+P("avg_occupancy")+". المهم مو أعلى سعر… المهم أعلى دخل بالشهر.","","","ins"],
+      ["37–44s","CTA","اكتب "+K("شقتي")+" بالتعليقات.","اكتب \"شقتي\"","","cta"]]},
+    {id:"V11",week:3,title:"نشتغل مع الملاك بطريقتين",meta:["Offer explainer","~45s","Keyword: قنوات","Split screen ١ / ٢"],beats:[
+      ["0–2s","Hook","عندنا طريقتين نشتغل فيها مع الملاك… وأي وحدة تناسبك؟","أي وحدة تناسبك؟","","hook"],
+      ["2–18s","1","نمسك كل شي: الإعلان، التسعير، الضيوف، النظافة، الصيانة. أنت تستلم الدخل والتقرير.","١) إدارة كاملة","",""],
+      ["18–32s","2","تبي تشغلها بنفسك؟ نمسك لك المنصات والتسعير والإعلان، وأنت على التشغيل.","٢) إدارة القنوات","",""],
+      ["32–40s","Insight","مو كل مالك يحتاج نفس الشي. المهم تختار اللي يناسب وقتك.","","","ins"],
+      ["40–47s","CTA","مو متأكد أي وحدة؟ اكتب "+K("قنوات")+" ونساعدك تختار.","اكتب \"قنوات\"","","cta"]]},
+    {id:"V12",week:4,title:"Reply-to-comment video",meta:["Community","~40s","Keyword: original video's","TikTok \"Reply with video\" so the comment sticker shows"],beats:[
+      ["0–3s","Hook","Read the question out loud (likely \"كم نسبتكم؟\" / \"تشتغلون في حي …؟\" / \"لازم تكون مفروشة؟\").","Comment sticker","","hook"],
+      ["3–30s","1–2–3","An honest, direct answer in 3 points.","١ / ٢ / ٣","",""],
+      ["30–37s","Insight","One reframe line.","","","ins"],
+      ["37–44s","CTA","CTA with the original video's keyword.","","","cta"]],
+      note:"Pick the most common question from weeks 1–3. TikTok shows reply videos to people who engaged with the original."},
+    {id:"V13",week:4,title:"٢٤ ساعة مع فريق سويتي",meta:["Behind the scenes · day in the life","~50s","Keyword: تم","Vlog style, timestamps on screen"],beats:[
+      ["0–40s","Timeline","","٨:٠٠ ص اجتماع التشغيل · ١٠:٠٠ مراجعة الأسعار · ١٢:٠٠ فحص بعد الخروج · ٣:٠٠ م استقبال ضيف · ١١:٠٠ م رد على رسالة ضيف","Montage of each moment","hook"],
+      ["40–46s","Insight","هذا يوم عادي… عشان المالك يكون يومه عادي بعد.","","Face to camera","ins"],
+      ["46–52s","CTA","اكتب "+K("تم")+" وأرسل لك التفاصيل.","اكتب \"تم\"","","cta"]]},
+    {id:"V14",week:4,title:"قبل ما يبدأ الموسم…",meta:["Money · urgency","~40s","Keyword: دخل","Tie to the next real Riyadh event (confirm dates)"],beats:[
+      ["0–2s","Hook","باقي "+P("days")+" يوم على "+P("event")+"… وشقتك للحين مؤجرة سنوي؟","باقي "+P("days")+" يوم","","hook"],
+      ["2–30s","1–2–3","One line per point.","١) الطلب يرتفع · ٢) الشقق الجاهزة تنحجز أول · ٣) التجهيز ياخذ وقت، ابدأ الحين","",""],
+      ["30–37s","Insight","اللي يدخل الموسم جاهز، هو اللي يقطف.","","","ins"],
+      ["37–44s","CTA","اكتب "+K("دخل")+" بالتعليقات.","اكتب \"دخل\"","","cta"]]}
+  ];
+  var arRe = /[؀-ۿ]/;
+  function isAr(s){ return arRe.test(s.replace(/<[^>]+>/g,"")) && !/^(Q:|Read|One|An |Walk|CTA|Owner|The )/.test(s); }
+  var out = scripts.map(function(s){
+    var beats = s.beats.map(function(b){
+      var say = b[2] ? '<div class="say"'+(isAr(b[2])?' lang="ar" dir="rtl"':'')+'>'+b[2]+'</div>' : '';
+      var scr = b[3] ? '<div class="s"><span lang="ar" dir="rtl">'+b[3]+'</span></div>' : '';
+      var shot = b[4] ? '<div class="v">'+b[4]+'</div>' : '';
+      return '<li class="'+b[5]+'"><span class="t">'+b[0]+'</span><span class="b">'+b[1]+'</span><div class="c">'+say+scr+shot+'</div></li>';
+    }).join("");
+    var extra = "";
+    if (s.alt) extra += '<div><b>Alt hooks for ads</b><ul>'+s.alt.map(function(a){return '<li lang="ar" dir="rtl">'+a+'</li>';}).join("")+'</ul></div>';
+    if (s.caption) extra += '<div><b>Caption</b><div lang="ar" dir="rtl">'+s.caption+'</div></div>';
+    if (s.note) extra += '<div><b>Note</b><div>'+s.note+'</div></div>';
+    return '<article class="script" data-week="'+s.week+'" id="'+s.id.toLowerCase()+'"><header><span class="vid">'+s.id+' · W'+s.week+'</span><h3'+(arRe.test(s.title)?' lang="ar" dir="rtl"':'')+'>'+s.title+'</h3><div class="meta">'+s.meta.map(function(m){return '<span>'+m+'</span>';}).join("")+'</div></header><ol class="beats">'+beats+'</ol>'+(extra?'<div class="extra">'+extra+'</div>':'')+'</article>';
+  }).join("");
+  document.getElementById("scriptlist").innerHTML = out;
+
+  var btns = document.querySelectorAll(".filters button");
+  function setWeek(w){
+    btns.forEach(function(b){ b.setAttribute("aria-pressed", String(b.dataset.week===w)); });
+    document.querySelectorAll("article.script").forEach(function(a){ a.hidden = !(w==="all" || a.dataset.week===w); });
+    try{ localStorage.setItem("suitiee-week", w); }catch(e){}
+  }
+  btns.forEach(function(b){ b.addEventListener("click", function(){ setWeek(b.dataset.week); }); });
+  try{ var saved = localStorage.getItem("suitiee-week"); if (saved) setWeek(saved); }catch(e){}
+
+  var replies = [
+    "أرسلنا لك التفاصيل، شيّك على رسائلك 📩 وإذا ما وصلت راسلنا مباشرة",
+    "حياك الله! كلمنا على الخاص وبنرسل لك كل التفاصيل عن إدارة شقتك 🔑",
+    "تمام 👌 افتح الرسائل وأرسل لنا \"شقتي\" ونكمل معك هناك",
+    "وصلنا! راسلنا بالخاص ونحسب لك دخل شقتك المتوقع 📊",
+    "أبشر، التفاصيل بالخاص 📩 راسلنا ونرد عليك بأسرع وقت"
+  ];
+  var ul = document.getElementById("replies");
+  replies.forEach(function(r,i){
+    var li = document.createElement("li");
+    li.innerHTML = '<span class="txt" lang="ar" dir="rtl"></span><span class="cnt"></span><button class="copy" type="button">Copy</button>';
+    li.querySelector(".txt").textContent = r;
+    li.querySelector(".cnt").textContent = Array.from(r).length + "/150";
+    li.querySelector("button").addEventListener("click", function(e){ copy(r, e.currentTarget, li.querySelector(".txt")); });
+    ul.appendChild(li);
+  });
+  document.querySelectorAll("[data-copy-target]").forEach(function(b){
+    b.addEventListener("click", function(){ var el = document.getElementById(b.dataset.copyTarget); copy(el.textContent, b, el); });
+  });
+  function copy(text, btn, el){
+    var label = btn.textContent;
+    function done(msg){ btn.textContent = msg; setTimeout(function(){ btn.textContent = label; }, 1500); }
+    function fallback(){ var r = document.createRange(); r.selectNodeContents(el); var s = window.getSelection(); s.removeAllRanges(); s.addRange(r); done("Selected, press Ctrl+C"); }
+    try{
+      navigator.clipboard.writeText(text).then(function(){ done("Copied"); }, fallback);
+    }catch(e){ fallback(); }
+  }
+})();
+</script>
