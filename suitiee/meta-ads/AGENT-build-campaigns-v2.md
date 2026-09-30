@@ -11,6 +11,10 @@ You are building Suitiee's lead-ad campaigns in Meta Ads Manager, in Khalid's br
 - C2 (already created, PAUSED, ABO, no budget yet): 120248113212710539 "SUI | LEADS | CREATIVE-TEST | IG | KSA5"
 - C3 (already created, PAUSED, ABO, no budget yet): 120248113212770539 "SUI | LEADS | RETARGET | IG | Engaged-30d"
 - Audiences (already created): RT-IG-Engaged-30d 120248113218920539 · EX-LeadForm-60d 120248113219410539
+- Ad sets already staged as PAUSED drafts by the media buyer (10 SAR/day each, Instagram Feed/Stories/Reels/Explore, Instant form, Page Suitiee). They can't publish until the Lead Ads terms are accepted (1815089). Open and reuse them; don't create duplicates:
+  - C2 DARK-IMG 120248113395600539 · BEFORE-AFTER 120248113398360539 · VIDEO 120248113398570539 (KSA5 pins, Advantage+ audience with suggested age 25–60, Arabic + English)
+  - C3 RT | Engaged+Video50 | IG 120248113294540539 (Saudi Arabia, age 25–60, RT-IG-Engaged-30d, excludes EX-LeadForm-60d, Advantage+ audience OFF). In Step 4, add RT-Video50-30d to it.
+  - In each one, confirm "Allow limited spending to excluded placements" is OFF and set the 14-day end date.
 - Page: Suitiee (1360833533775829). Instagram: @suitiee.sa
 - Lead form (published, Higher intent): 1618687339646791
 - Files: the repo folder suitiee/meta-ads/creatives/ (Khalid uploads them if you can't reach the repo).
