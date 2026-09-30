@@ -7,7 +7,10 @@ You are building Suitiee's lead-ad campaigns in Meta Ads Manager, in Khalid's br
 
 ## Fixed values
 - Ad account: Suitiee Ads, act_2629307547521500. This is the ONLY account you may touch. Check the account ID at the top of Ads Manager before every step.
-- Existing campaign (C1): 120248044547720539 "SUI | LEADS-FORM | STR-Operators | KSA-5cities | 2026-10-01"
+- C1 (existing): 120248044547720539 "SUI | LEADS-FORM | STR-Operators | KSA-5cities | 2026-10-01"
+- C2 (already created, PAUSED, ABO, no budget yet): 120248113212710539 "SUI | LEADS | CREATIVE-TEST | IG | KSA5"
+- C3 (already created, PAUSED, ABO, no budget yet): 120248113212770539 "SUI | LEADS | RETARGET | IG | Engaged-30d"
+- Audiences (already created): RT-IG-Engaged-30d 120248113218920539 · EX-LeadForm-60d 120248113219410539
 - Page: Suitiee (1360833533775829). Instagram: @suitiee.sa
 - Lead form (published, Higher intent): 1618687339646791
 - Files: the repo folder suitiee/meta-ads/creatives/ (Khalid uploads them if you can't reach the repo).
@@ -39,21 +42,21 @@ You are building Suitiee's lead-ad campaigns in Meta Ads Manager, in Khalid's br
 - The A-series images (01…05) are already in the library.
 
 ## Step 2: C1 (existing campaign 120248044547720539)
-- Campaign budget (CBO): change 100 → **60 SAR/day**. Don't change the campaign spending limit.
+- Campaign budget (CBO): the change 100 → **60 SAR/day** is already staged as a draft by the media buyer. When you publish, confirm it shows 60. Don't change the campaign spending limit.
 - In BOTH ad sets (Riyadh, West+East), add 1 video ad, "V1-STORY | VID | H1+H2 | v1" (copy below). Each ad set now has 6 ads (the 5 image ads + V1).
 
 ## Step 3: C2 (new campaign)
-- Campaign: "SUI | LEADS | CREATIVE-TEST | IG | KSA5". Objective: Leads. Budget at ad-set level (ABO). Campaign spending limit: **420 SAR**. OFF.
+- Use the existing campaign 120248113212710539 (don't create a new one). ABO. No campaign spending limit (Meta's minimum is 500 SAR, above the approved 420; spend is bounded by the ad-set budgets and end date). OFF.
+- On each C2 ad set set an end date 14 days after the start date Khalid approves, so the max spend is 3 × 10 × 14 = 420 SAR.
 - Ad set "DARK-IMG | KSA5 | Adv+ 25-60 | IG", 10 SAR/day: ads B1, B2, B3, B4, B5
 - Ad set "BEFORE-AFTER | KSA5 | Adv+ 25-60 | IG", 10 SAR/day: ads C1, C2, C3
 - Ad set "VIDEO | KSA5 | Adv+ 25-60 | IG", 10 SAR/day: ads V2, V3, V4, V5
 
 ## Step 4: Audiences + C3 (new campaign)
-- Create custom audiences (Audiences → Create → Custom audience):
-  - "RT-IG-Engaged-30d": Instagram account @suitiee.sa, everyone who engaged, 30 days.
-  - "RT-Video50-30d": Video, people who watched at least 50%. Select all 5 videos above. 30 days.
-  - "EX-LeadForm-60d": Lead form 1618687339646791, people who opened this form, 60 days.
-- Campaign: "SUI | LEADS | RETARGET | IG | Engaged-30d". Objective: Leads. ABO. Campaign spending limit: **140 SAR**. OFF.
+- RT-IG-Engaged-30d and EX-LeadForm-60d already exist. Create ONE custom audience (Audiences → Create → Custom audience):
+  - "RT-Video50-30d": Video, people who watched at least 50%. Select all 5 videos from Step 1. 30 days.
+- Use the existing campaign 120248113212770539 (don't create a new one). ABO. No campaign spending limit (same reason as C2). OFF.
+- End date on the C3 ad set: 14 days after its start date, so the max spend is 10 × 14 = 140 SAR.
 - Ad set "RT | Engaged+Video50 | IG", 10 SAR/day. Custom audiences: RT-IG-Engaged-30d + RT-Video50-30d. Exclude EX-LeadForm-60d. Locations: Saudi Arabia. Age 25–60. Advantage+ audience OFF, so it stays retargeting only.
 - Ads: R1, R2, B5 (image) and V5 (video).
 
@@ -201,5 +204,5 @@ R2-THINK | IMG | H1+H2 | v1 · R2-think
 
 ## Report back (table)
 | Level | Name | ID | Status | Budget | Placements |
-Rows: 3 campaigns, 6 ad sets, 28 ads, 3 audiences (with ID and size), and any errors or warnings (exact text). Confirm: Instagram only, nothing On, only the budgets listed above were changed, no billing change, no terms accepted by you. Then tell Khalid: "send this report to the media buyer".
+Rows: 3 campaigns, 6 ad sets, 28 ads, the RT-Video50-30d audience (with ID and size), and any errors or warnings (exact text). Confirm: Instagram only, nothing On, only the budgets listed above were changed, no billing change, no terms accepted by you. Then tell Khalid: "send this report to the media buyer".
 ```
