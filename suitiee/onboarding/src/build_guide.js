@@ -44,13 +44,13 @@ function table(widths, rows, headFill = INK) {
 
 const children = [];
 children.push(p("Suitiee | سويتي", { alignment: AlignmentType.LEFT, bidirectional: false }, { bold: true, color: BRONZE, size: 24 }));
-children.push(new Paragraph({ heading: HeadingLevel.TITLE, bidirectional: true, alignment: AlignmentType.RIGHT, children: [run("دليل المقدّم: كيف نعمل في سويتي؟")] }));
-children.push(p("من الحجز إلى جاهزية الوحدة للضيف التالي", {}, { size: 28, sizeComplexScript: 28, color: MUTED }));
+children.push(new Paragraph({ heading: HeadingLevel.TITLE, bidirectional: true, alignment: AlignmentType.RIGHT, children: [run("دليل المقدّم: كيف نشتغل في سويتي؟")] }));
+children.push(p("من أول ما يجينا الحجز… لين تجهز الشقة للضيف اللي بعده", {}, { size: 28, sizeComplexScript: 28, color: MUTED }));
 children.push(p("المقدّم: عبدالله | فريق التشغيل", {}, { bold: true, boldComplexScript: true }));
-children.push(p("جلسة تعريفية داخلية للفريق · 16 شريحة · حوالي 24 دقيقة عرض + 5 دقائق نقاش · مبنية على إحاطة عبدالله بتاريخ 22 أكتوبر 2026", {}, { color: MUTED }));
+children.push(p("جلسة تعريفية داخلية للفريق · 21 شريحة · حوالي 23 دقيقة عرض + 5 دقائق نقاش · مبنية على إحاطة عبدالله بتاريخ 22 أكتوبر 2026", {}, { color: MUTED }));
 
 children.push(new Paragraph({ heading: HeadingLevel.HEADING_1, bidirectional: true, alignment: AlignmentType.RIGHT, children: [run("كيف تستخدم هذا الدليل")] }));
-children.push(p("لكل شريحة: الفكرة الرئيسية، وصياغة مقترحة بلهجة عمل سعودية قريبة، ومثال عند الحاجة، ومصدر المحتوى، وجملة الانتقال، والوقت التقريبي. لا تقرأ النص حرفيًا؛ استخدمه كمرشد."));
+children.push(p("لكل شريحة: الفكرة الرئيسية، وكلام مقترح باللهجة اللي نتكلم فيها بالشغل، ومثال لو احتجت، ومصدر المحتوى، وجملة تنقلك للشريحة اللي بعدها، والوقت التقريبي. لا تقرأ النص حرفيًا؛ خذه كمرشد. شرائح «الحالات» (10، 11، 14، 15، 18، 20) تمارين: اسأل القاعة أول، وبعدها اشرح الحل."));
 children.push(p("وسوم مصدر المحتوى:", {}, { bold: true, boldComplexScript: true }));
 children.push(bullet([run(`[${TAG.brief}] `, { bold: true, boldComplexScript: true, color: BRONZE }), run("معلومة من إحاطة عبدالله التشغيلية.")]));
 children.push(bullet([run(`[${TAG.proposed}] `, { bold: true, boldComplexScript: true, color: GREEN }), run("ممارسة أو أداة تدريبية مقترحة، وليست إجراءً معتمدًا في الشركة بعد.")]));
@@ -60,9 +60,9 @@ children.push(new Paragraph({ heading: HeadingLevel.HEADING_1, bidirectional: tr
 let cum = 0;
 const timing = [["#", "الشريحة", "الوقت", "التراكمي"]];
 NOTES.forEach((n, i) => { cum += n.minutes; timing.push([String(i + 1), n.title, fmtTime(n.minutes), fmtTime(cum)]); });
-timing.push(["", "نقاش وأسئلة", "5:00 دقائق", fmtTime(cum + 5)]);
+timing.push(["", "نقاش وأسئلة", "5:00 د", fmtTime(cum + 5)]);
 children.push(table([700, 5338, 1800, 1800], timing));
-children.push(p("إذا ضاق الوقت: اختصر الشرائح 3 و4 و15 إلى دقيقة لكل منها، ولا تختصر الشريحة 8 (النافذة الحرجة) ولا 14 (المال والمسؤوليات).", { spacing: { before: 120, after: 120 } }, { color: MUTED }));
+children.push(p("لو ضاق الوقت: اختصر الشرائح 3 و4 و19، أو خلّ الجولة السريعة (20) جزء من النقاش. لا تختصر الشريحة 8 (أزحم وقت) ولا 17 (الفلوس والمسؤوليات).", { spacing: { before: 120, after: 120 } }, { color: MUTED }));
 
 NOTES.forEach((n, i) => {
   children.push(new Paragraph({ children: [new PageBreak()] }));
@@ -82,21 +82,21 @@ children.push(new Paragraph({ children: [new PageBreak()] }));
 children.push(new Paragraph({ heading: HeadingLevel.HEADING_1, bidirectional: true, alignment: AlignmentType.RIGHT, children: [run("ملحق أ: أين تُغطّى أسئلة الملاك العشرة؟")] }));
 children.push(table([3800, 1300, 4538], [
   ["السؤال", "الشريحة", "حالة الإجابة"],
-  ["عرّفني عن شركتكم، وش تقدمون؟", "13", "مبدأ معتمد من الإحاطة"],
-  ["إيش الخدمات اللي تقدمونها لي؟", "13", "مبدأ معتمد؛ التفاصيل حسب العقد"],
-  ["هل تتعاملون مع Airbnb وجاذر إن وبوكينج؟", "13", "يحتاج تأكيد المنصات المدعومة فعليًا"],
-  ["هل أقدر أتابع حجوزات شقتي وإيراداتها؟", "13", "يحتاج تأكيد وسائل المتابعة المتاحة"],
-  ["كم عمولتكم أو رسوم الإدارة؟", "14", "يحتاج الرسوم المعتمدة"],
-  ["متى أستلم مستحقاتي؟", "14", "يحتاج دورة التسوية المعتمدة"],
-  ["هل تضمنون لي حجوزات كل شهر؟", "14", "مبدأ معتمد: لا ضمان لعدد أو دخل"],
-  ["من المسؤول عن تنظيف الشقة بعد خروج الضيف؟", "14", "حسب الاتفاق"],
-  ["إذا صار عطل في الشقة، من يتحمل تكلفته؟", "14", "حسب العقد ونوع العطل"],
-  ["كيف تضمنون عدم تداخل الحجوزات؟", "6 و14", "مبدأ معتمد من الإحاطة"],
+  ["عرّفني عن شركتكم، وش تقدمون؟", "16", "مبدأ معتمد من الإحاطة"],
+  ["إيش الخدمات اللي تقدمونها لي؟", "16", "مبدأ معتمد؛ التفاصيل حسب العقد"],
+  ["هل تتعاملون مع Airbnb وجاذر إن وبوكينج؟", "16، 20", "يحتاج تأكيد المنصات المدعومة فعليًا"],
+  ["هل أقدر أتابع حجوزات شقتي وإيراداتها؟", "16", "يحتاج تأكيد وسائل المتابعة المتاحة"],
+  ["كم عمولتكم أو رسوم الإدارة؟", "17، 18", "يحتاج الرسوم المعتمدة"],
+  ["متى أستلم مستحقاتي؟", "17", "يحتاج دورة التسوية المعتمدة"],
+  ["هل تضمنون لي حجوزات كل شهر؟", "17، 18", "مبدأ معتمد: لا ضمان لعدد أو دخل"],
+  ["من المسؤول عن تنظيف الشقة بعد خروج الضيف؟", "17", "حسب الاتفاق"],
+  ["إذا صار عطل في الشقة، من يتحمل تكلفته؟", "17", "حسب العقد ونوع العطل"],
+  ["كيف تضمنون عدم تداخل الحجوزات؟", "6، 17", "مبدأ معتمد من الإحاطة"],
 ]));
 
 children.push(new Paragraph({ heading: HeadingLevel.HEADING_1, bidirectional: true, alignment: AlignmentType.RIGHT, spacing: { before: 360 }, children: [run("ملحق ب: بنود تحتاج تأكيدًا داخليًا قبل الجلسة")] }));
 [
-  "مواعيد الدخول والخروج المعتمدة (الفترة 12:00–5:00 ذروة تشغيلية فقط، وليست مواعيد رسمية).",
+  "مواعيد الدخول والخروج المعتمدة (الفترة من 12 الظهر إلى 5 العصر ذروة تشغيلية فقط، وليست مواعيد رسمية).",
   "الرسوم ونسب العمولة وطريقة الحساب والتكاليف الإضافية.",
   "دورة التسوية ومواعيد التحويل وشكل كشف الإيرادات والخصومات.",
   "المنصات المدعومة فعليًا وطريقة إدارة الإعلانات والحجوزات عليها، وهل يوجد ربط مباشر مع أي منصة.",
@@ -109,7 +109,7 @@ children.push(new Paragraph({ heading: HeadingLevel.HEADING_1, bidirectional: tr
 
 const doc = new Document({
   creator: "عبدالله | فريق التشغيل",
-  title: "دليل المقدّم: كيف نعمل في سويتي؟",
+  title: "دليل المقدّم: كيف نشتغل في سويتي؟",
   styles: {
     default: { document: { run: { font: { ascii: FONT, hAnsi: FONT, cs: FONT }, size: 22, sizeComplexScript: 22, color: INK, rightToLeft: true } } },
     paragraphStyles: [
