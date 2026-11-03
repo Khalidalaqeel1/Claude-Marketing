@@ -216,9 +216,19 @@ const FONT = w => w >= 800 ? ['thmanyah sans Black', false]
       return pic.replace(/<a:prstGeom prst="rect">[\s\S]*?<\/a:prstGeom>/, geom + ln)
                 .replace(/name="PHOTO\|[^"]*"/, `name="${LABEL[name] || name}"`);
     });
+    // pptxgenjs writes the corner guide of round2SameRect as "adj"; PowerPoint expects adj1/adj2
+    xml = xml.replace(/(<a:prstGeom prst="round2SameRect"><a:avLst>)<a:gd name="adj" fmla="val (\d+)"\/>/g,
+                      '$1<a:gd name="adj1" fmla="val $2"/><a:gd name="adj2" fmla="val 0"/>');
     zip.file(f, xml);
   }
-  fs.writeFileSync(OUT, await zip.generateAsync({ type: 'nodebuffer', compression: 'DEFLATE' }));
+  // standard MIME type for .jpg parts (pptxgenjs writes the non-standard "image/jpg")
+  const CT = '[Content_Types].xml';
+  zip.file(CT, (await zip.file(CT).async('string')).replace('ContentType="image/jpg"', 'ContentType="image/jpeg"'));
+  // repack the way Office writes it: [Content_Types].xml first, no folder entries
+  const out = new JSZip();
+  const names = Object.keys(zip.files).filter(n => !zip.files[n].dir);
+  for (const n of [CT, ...names.filter(n => n !== CT)]) out.file(n, await zip.file(n).async('nodebuffer'), { createFolders: false });
+  fs.writeFileSync(OUT, await out.generateAsync({ type: 'nodebuffer', compression: 'DEFLATE' }));
   fs.rmSync(TMP, { recursive: true, force: true });
   console.log('wrote', OUT);
 })();
