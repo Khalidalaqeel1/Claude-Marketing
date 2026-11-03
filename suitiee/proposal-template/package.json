@@ -1,0 +1,13 @@
+{
+  "name": "suitiee-proposal-template",
+  "private": true,
+  "description": "Suitiee owner proposal: HTML frames -> PDF and editable PPTX",
+  "scripts": {
+    "pdf": "node render.js",
+    "pptx": "node export-pptx.js"
+  },
+  "dependencies": {
+    "pptxgenjs": "^3.12.0",
+    "jszip": "^3.10.1"
+  }
+}
