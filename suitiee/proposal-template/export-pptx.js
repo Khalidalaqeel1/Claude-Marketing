@@ -151,7 +151,7 @@ const FONT = w => w >= 800 ? ['thmanyah sans Black', false]
     slide.addShape(pres.shapes.ROUNDED_RECTANGLE, { x: inch(X), y: inch(Y), w: inch(W), h: inch(H), rectRadius: inch(22),
       fill: { color: 'FFFFFF' }, line: { type: 'none' }, shadow: { type: 'outer', color: '2B1D14', opacity: 0.18, blur: 24, offset: 8, angle: 90 }, objectName: 'Sheet' });
     slide.addShape(pres.shapes.ROUND_2_SAME_RECTANGLE, { x: inch(X), y: inch(Y), w: inch(W), h: inch(TB), rectRadius: inch(22), fill: { color: '2B1D14' }, line: { type: 'none' }, objectName: 'Title bar' });
-    slide.addImage({ path: resolve('assets/logo/suitiee-mark-light.png'), x: inch(X + W - 30 - 43), y: inch(Y + 16), w: inch(43), h: inch(52), objectName: 'Suitiee logo' });
+    slide.addImage({ path: resolve('assets/logo/suitiee-mark-light.png'), x: inch(X + W - 30 - 43), y: inch(Y + 16), w: inch(43), h: inch(52), objectName: 'Suitiee logo', altText: 'Suitiee' });
     slide.addText(F.title, { x: inch(X + 300), y: inch(Y), w: inch(W - 600), h: inch(TB), margin: 0, align: 'center', valign: 'middle',
       fontFace: 'thmanyah sans Black', fontSize: 22, color: 'FCF7EF', rtlMode: true, lang: 'ar-SA', isTextBox: true });
     slide.addText('suitiee.com', { x: inch(X + 34), y: inch(Y), w: inch(300), h: inch(TB), margin: 0, align: 'left', valign: 'middle',

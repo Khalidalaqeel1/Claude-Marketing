@@ -23,7 +23,7 @@
 {
   "cover": {
     "eyebrow": "عرض إدارة وتشغيل",
-    "owner": "[اسم المالك]",
+    "owner": "",
     "property": "[اسم العقار]",
     "date": "[نوفمبر 2026]",
     "photo": "assets/photos/hero-1400.jpg"
@@ -92,11 +92,13 @@
 
   "contact": {
     "headline": "لتشغيل الشقق المفروشة\nوالإيجار اليومي",
-    "phone": "[05XXXXXXXX]",
+    "phone": "+966 11 516 5868",
     "website": "suitiee.com",
+    "email": "info@suitiee.com",
     "companyLine": "سويتي · منصة وخدمات تشغيل لوحدات الضيافة",
-    "legalName": "[اسم المنشأة]",
-    "cr": "[0000000000]"
+    "legalName": "شركة سويتي مانجمنت · شركة ذات مسؤولية محدودة",
+    "crLabel": "الرقم الوطني الموحد",
+    "cr": "7036425838"
   }
 }
 </script>
@@ -318,7 +320,7 @@ html.bgonly [data-pic] > *{visibility:hidden!important}
     <div class="tag" data-t>منصة وخدمات تشغيل لوحدات الضيافة</div>
     <div class="rule"></div>
     <div class="eyebrow eb" data-t>${esc(CV.eyebrow)}</div>
-    <div class="for" data-t>${t(CV.property)} · مقدَّم إلى ${t(CV.owner)}</div>
+    <div class="for" data-t>${t(CV.property)}${CV.owner ? ` · مقدَّم إلى ${t(CV.owner)}` : ''}</div>
     <div class="date" data-t>${t(CV.date)}</div>
     <div class="site ltr" data-t>suitiee.com</div>
   </section>`);
@@ -446,8 +448,8 @@ html.bgonly [data-pic] > *{visibility:hidden!important}
     <div class="divider"></div>
     <h2 data-t>${br(C.headline)}</h2>
     <div class="phone" data-t>${t(C.phone)}</div>
-    <div class="site ltr" data-t>${esc(C.website)}</div>
-    <div class="legal" data-t>${t(C.legalName)}<br>السجل التجاري: ${t(C.cr)}</div>
+    <div class="site ltr" data-t>${esc(C.website)}${C.email ? `  ·  ${esc(C.email)}` : ''}</div>
+    <div class="legal" data-t>${t(C.legalName)}<br>${esc(C.crLabel || 'السجل التجاري')}: <span class="ltr">${t(C.cr)}</span></div>
   </section>`);
 
   document.getElementById('deck').innerHTML = S.map(s => `<div class="frame">${s}</div>`).join('');
