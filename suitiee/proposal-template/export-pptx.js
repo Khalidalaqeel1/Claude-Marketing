@@ -1,5 +1,5 @@
 // Export the Suitiee proposal (HTML frames) to an editable PowerPoint.
-//   node export-pptx.js [suitiee-proposal.html] [suitiee-proposal.pptx]
+//   node export-pptx.js [suitiee-proposal.html] [suitiee-proposal.pptx] [--data clients/x/data.json]
 //
 // Each slide = one background image of the design art (patterns, shapes, cards)
 // + live text boxes, + real pictures (right-click → Change Picture), + a native
@@ -10,8 +10,10 @@ const JSZip = require('jszip');
 const path = require('path');
 const fs = require('fs');
 
-const SRC = path.resolve(process.argv[2] || 'suitiee-proposal.html');
-const OUT = path.resolve(process.argv[3] || 'suitiee-proposal.pptx');
+const ARGV = process.argv.slice(2), DI = ARGV.indexOf('--data');
+const DATA = DI >= 0 ? path.resolve(ARGV.splice(DI, 2)[1]) : null;
+const SRC = path.resolve(ARGV[0] || 'suitiee-proposal.html');
+const OUT = path.resolve(ARGV[1] || 'suitiee-proposal.pptx');
 const PX = 144;                 // 1920px slide ↔ 13.333in  → 144 px per inch
 const PT = 0.5;                 // 1px ↔ 0.5pt
 const TMP = fs.mkdtempSync(path.join(require('os').tmpdir(), 'suitiee-pptx-'));
@@ -26,6 +28,7 @@ const FONT = w => w >= 800 ? ['thmanyah sans Black', false]
 (async () => {
   const browser = await chromium.launch();
   const page = await browser.newPage({ viewport: { width: 1920, height: 1080 }, deviceScaleFactor: 2 });
+  if (DATA) await page.addInitScript(`window.__PROPOSAL = ${fs.readFileSync(DATA, 'utf8')};`);
   await page.goto('file://' + SRC, { waitUntil: 'networkidle' });
   await page.emulateMedia({ media: 'print' });
   await page.evaluate(() => document.fonts.ready);
@@ -158,17 +161,17 @@ const FONT = w => w >= 800 ? ['thmanyah sans Black', false]
     const LINE = { type: 'solid', pt: 0.5, color: 'EFE7DA' }, NONE = { type: 'none' };
     const base = { fontFace: 'thmanyah sans', fontSize: 14, color: '2B1D14', valign: 'middle', rtlMode: true, lang: 'ar-SA', margin: [0, 0.09, 0, 0.09] };
     const rows = [], heights = [];
-    const RH = 44, NUMW = 320, LBLW = W - 3 * NUMW;
+    const RH = F.rh || 44, NUMW = 320, LBLW = W - 3 * NUMW;
     const sec = (label, h = 52) => { rows.push([{ text: label, options: { ...base, colspan: 4, align: 'center', fontFace: 'thmanyah sans Black', fontSize: 15, fill: { color: 'F0E6D9' }, border: [NONE, NONE, NONE, NONE] } }]); heights.push(h); };
     sec(F.sec);
     let zebra = 0;
     F.rows.forEach(r => {
       if (r.kind === 'sec') { sec(r.label); zebra = 0; return; }
-      const head = r.kind === 'head', bold = r.kind === 'bold', tot = r.kind === 'tot', net = r.kind === 'net';
+      const head = r.kind === 'head', bold = r.kind === 'bold', tot = r.kind === 'tot' || r.kind === 'mo', net = r.kind === 'net';
       const fill = net ? '2B1D14' : bold ? 'F6E4D8' : (head || tot) ? 'FFFFFF' : (zebra++ % 2 ? 'FBF8F3' : 'FFFFFF');
       const face = (head || bold || net) ? 'thmanyah sans Black' : tot ? 'thmanyah sans' : 'thmanyah sans';
       const size = net ? 17 : 14;
-      const top = tot ? { type: 'solid', pt: 1, color: '2B1D14' } : NONE;
+      const top = r.kind === 'tot' ? { type: 'solid', pt: 1, color: '2B1D14' } : NONE;
       const cells = [];
       for (let vi = 2; vi >= 0; vi--) {                      // visual order: left → right = متفائل … المتحفظ
         cells.push({ text: r.vals[vi] ?? '', options: { ...base, fontFace: face, bold: tot, fontSize: size, align: head ? 'center' : 'right', rtlMode: head, lang: head ? 'ar-SA' : 'en-US',
@@ -184,7 +187,9 @@ const FONT = w => w >= 800 ? ['thmanyah sans Black', false]
       { text: F.foot[0], options: { ...base, align: 'right', color: '5A3F2E', fontSize: 13, border: [NONE, NONE, LINE, NONE] } }]);
     heights.push(RH);
     const used = TB + heights.reduce((a, b) => a + b, 0);
-    rows.push([{ text: [{ text: 'ملاحظات الدراسة: ', options: { fontFace: 'thmanyah sans Black' } }, { text: F.notes }],
+    const NOTES = [].concat(F.notes || []);
+    rows.push([{ text: [{ text: 'ملاحظات الدراسة', options: { fontFace: 'thmanyah sans Black', breakLine: true } },
+      ...NOTES.map((n, k) => ({ text: '· ' + n, options: { breakLine: k < NOTES.length - 1 } }))],
       options: { ...base, colspan: 4, align: 'right', valign: 'top', fontSize: 13, color: '5A3F2E', margin: [0.06, 0.09, 0, 0.09], border: [NONE, NONE, NONE, NONE] } }]);
     heights.push(Math.max(60, H - used - 6));
     slide.addTable(rows, { x: inch(X), y: inch(Y + TB), w: inch(W), colW: [inch(NUMW), inch(NUMW), inch(NUMW), inch(LBLW)], rowH: heights.map(inch), objectName: 'Financial study' });

@@ -239,7 +239,9 @@ html.bgonly [data-pic] > *{visibility:hidden!important}
 .r.net > div:first-child{color:#F0B48C}
 .r.foot{background:#fff!important;font-size:26px;color:var(--ink2);border:0}
 .notes{flex:1;padding:14px 26px;font-size:26px;line-height:1.5;color:var(--ink2);border-top:1px solid var(--line)}
-.notes b{font-weight:900;color:var(--ink)}
+.notes b{font-weight:900;color:var(--ink);display:block}
+.r.mo{background:#fff!important;color:var(--ink2);border:0}
+.r.mo .n{font-weight:700;color:var(--ink)}
 
 /* ── 7 · closing ───────────────────────────────── */
 .close{background:var(--cream)}
@@ -259,7 +261,8 @@ html.bgonly [data-pic] > *{visibility:hidden!important}
 
 <script>
 (function(){
-  const D = JSON.parse(document.getElementById('proposal').textContent);
+  // a client file can be injected by render.js / export-pptx.js (--data clients/x/data.json)
+  const D = window.__PROPOSAL || JSON.parse(document.getElementById('proposal').textContent);
   const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
   // "[..]" → highlighted placeholder (brackets kept in the text so they survive export)
   const t = s => { s = String(s ?? ''); return s.trim().startsWith('[') ? `<span class="ph">${esc(s)}</span>` : esc(s); };
@@ -280,6 +283,9 @@ html.bgonly [data-pic] > *{visibility:hidden!important}
   const MARK = 'assets/logo/suitiee-mark.png';
   const SPARK = '<svg class="sparkle" viewBox="0 0 24 24"><path fill="#E0A33D" d="M12 0C12.9 6.4 15.6 9.1 22 10 15.6 10.9 12.9 13.6 12 20 11.1 13.6 8.4 10.9 2 10 8.4 9.1 11.1 6.4 12 0Z"/></svg>';
   const ICON = {
+    cal:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/><circle cx="12" cy="15.5" r="1.6" fill="currentColor"/></svg>',
+    coin:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="6" rx="7" ry="3"/><path d="M5 6v6c0 1.7 3.1 3 7 3s7-1.3 7-3V6M5 12v6c0 1.7 3.1 3 7 3s7-1.3 7-3v-6"/></svg>',
+    wallet:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M4 7h15a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V6a2 2 0 012-2h11v3"/><circle cx="16.5" cy="13.5" r="1.5" fill="currentColor"/></svg>',
     trend:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg>',
     star:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2.9 6 6.6.8-4.9 4.6 1.3 6.5L12 17.2l-5.9 3.2 1.3-6.5L2.5 9.3l6.6-.8z"/></svg>',
     units:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M5 21V10a7 7 0 0114 0v11z"/><circle cx="12" cy="11" r="2" fill="currentColor"/><path d="M11.2 13h1.6l.5 4h-2.6z" fill="currentColor"/></svg>',
@@ -360,7 +366,7 @@ html.bgonly [data-pic] > *{visibility:hidden!important}
     const edge = right ? 'right:60px' : 'right:718px';      // card-relative
     const isAr = /[؀-ۿ]/.test(s.value) && !String(s.value).trim().startsWith('[');
     return `<div class="ic" style="${edge};top:${top+60}px">${ICON[s.icon]||ICON.plus}</div>
-      <div class="sv" data-t style="${right?'right:186px':'right:844px'};top:${top+(s.label?44:58)}px;width:440px;${isAr?'font-size:104px':''}">${t(s.value)}</div>
+      <div class="sv" data-t style="${right?'right:186px':'right:844px'};top:${top+(s.label?44:58)}px;width:440px;${isAr?'font-size:104px':String(s.value).length>5?'font-size:92px':''}">${t(s.value)}</div>
       ${s.label?`<div class="sl" data-t style="${right?'right:186px':'right:844px'};top:${top+170}px;width:440px">${t(s.label)}</div>`:''}`;
   }).join('');
   S.push(`<section class="slide dark stats on-dark">
@@ -391,7 +397,10 @@ html.bgonly [data-pic] > *{visibility:hidden!important}
   const F = D.finance, days = F.daysPerYear || 365;
   const unitRev = F.units.map(u => F.scenarios.map((_,i) => u.count * u.rate[i] * days * u.occupancy[i]));
   const totRev  = F.scenarios.map((_,i) => unitRev.reduce((a,r) => a + r[i], 0));
-  const totCost = F.scenarios.map((_,i) => F.costs.reduce((a,c) => a + totRev[i] * c.pct[i], 0));
+  // a cost is either a share of revenue (pct) or a fixed monthly amount (monthly)
+  const at = (v, i) => Array.isArray(v) ? v[i] : v;
+  const costAmt = c => F.scenarios.map((_,i) => c.pct != null ? totRev[i] * at(c.pct, i) : at(c.monthly, i) * 12);
+  const totCost = F.scenarios.map((_,i) => F.costs.reduce((a,c) => a + costAmt(c)[i], 0));
   const net     = F.scenarios.map((_,i) => totRev[i] - totCost[i]);
   const rows = [];   // also handed to the pptx exporter
   const row = (label, vals, kind='') => rows.push({label, vals: vals.map(String), kind});
@@ -403,12 +412,16 @@ html.bgonly [data-pic] > *{visibility:hidden!important}
     row(u.totalLabel, unitRev[k].map(num), 'bold');
   });
   row('التكاليف التشغيلية السنوية', [], 'sec');
-  F.costs.forEach(c => row(c.name, c.pct.map(pct)));
+  F.costs.forEach(c => row(c.name, c.pct != null ? F.scenarios.map((_,i) => pct(at(c.pct, i))) : costAmt(c).map(num)));
   row('إجمالي التكاليف التشغيلية السنوية', totCost.map(num), 'tot');
   row('صافي الأرباح للمالك سنويًا', net.map(num), 'net');
+  if (F.showMonthly) row('متوسط صافي الربح الشهري للمالك', net.map(v => num(v / 12)), 'mo');
   window.__FIN = { title:'الدراسة المالية', sec:'الإيراد المتوقع السنوي', rows, foot:[D.contact.companyLine, D.contact.phone], notes:F.notes };
-  const extra = Math.max(0, F.units.length - 2) * 4 + Math.max(0, F.costs.length - 4);
-  const rh = Math.max(30, 44 - extra * 3);
+  const notes = [].concat(F.notes || []);
+  const nReg = rows.filter(r => !['sec','head','net'].includes(r.kind)).length + 1;      // + footer row
+  const nSec = rows.filter(r => r.kind === 'sec').length + 1;
+  const rh = Math.max(30, Math.min(46, Math.floor((1024 - 84 - 52*nSec - 56 - 66 - (60 + 36*notes.length)) / nReg)));
+  window.__FIN.rh = rh; window.__FIN.notes = notes;
   const html = rows.map(r => r.kind === 'sec'
       ? `<div class="sec">${esc(r.label)}</div>`
       : `<div class="r ${r.kind}"><div>${esc(r.label)}</div>${r.vals.map((v,i)=>`<div class="n c${i%3}">${esc(v)}</div>`).join('')}</div>`).join('');
@@ -418,7 +431,7 @@ html.bgonly [data-pic] > *{visibility:hidden!important}
       <div class="sec">الإيراد المتوقع السنوي</div>
       ${html}
       <div class="r foot"><div>${esc(D.contact.companyLine)}</div><div></div><div></div><div class="n" style="justify-content:flex-start">${t(D.contact.phone)}</div></div>
-      <div class="notes"><b>ملاحظات الدراسة: </b>${t(F.notes)}</div>
+      <div class="notes"><b>ملاحظات الدراسة</b>${notes.map(n => `<div>· ${t(n)}</div>`).join('')}</div>
     </div>
   </section>`);
 

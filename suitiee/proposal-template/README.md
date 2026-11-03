@@ -37,3 +37,13 @@
    ```
 
 الصور الحالية أمثلة من موقع سويتي، وأرقام الدراسة المالية نفس أرقام الدراسة المرجعية. الإحصائيات ورقم الجوال والسجل التجاري خانات فارغة، فعبّها بأرقام حقيقية قبل الإرسال.
+
+## عرض لعميل محدد
+لكل عميل ملف بيانات خاص في `clients/<اسم-العميل>/data.json` بنفس شكل كتلة `proposal`، ويبقى القالب نفسه بدون تعديل:
+```
+node render.js suitiee-proposal.html clients/al-rawabi/suitiee-alrawabi.pdf --data clients/al-rawabi/data.json
+node export-pptx.js suitiee-proposal.html clients/al-rawabi/suitiee-alrawabi.pptx --data clients/al-rawabi/data.json
+```
+- التكلفة إما نسبة من الإيراد `"pct": 0.15`، أو مبلغ شهري ثابت `"monthly": 2365`.
+- `"showMonthly": true` يضيف صف «متوسط صافي الربح الشهري».
+- `"notes"` تقبل نصًا واحدًا أو قائمة ملاحظات.
