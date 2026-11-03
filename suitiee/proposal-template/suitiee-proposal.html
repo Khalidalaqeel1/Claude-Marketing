@@ -6,255 +6,221 @@
 <title>عرض تشغيل سويتي</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap">
 
 <!--
   ═══════════════════════════════════════════════════════════════════
-  قالب عرض تشغيل سويتي (Suitiee owner proposal)
+  قالب عرض تشغيل سويتي: نفس إطارات العرض المرجعي، بهوية سويتي
+  كل صفحة "frame" بمقاس 1920×1080.
   عدّل البيانات في الكتلة "proposal" تحت فقط، والصفحات تتحدث تلقائيًا.
   - أي نص يبدأ بـ "[" يظهر كخانة مطلوب تعبئتها (مظللة).
-  - الحسابات المالية تتحسب تلقائيًا من الوحدات والأسعار والإشغال والتكاليف.
-  - للطباعة PDF: افتح الملف في Chrome ثم طباعة ← حفظ PDF،
-    أو شغّل:  node render.js suitiee-proposal.html out.pdf
+  - الدراسة المالية تنحسب تلقائيًا من الوحدات والأسعار والإشغال والتكاليف.
+  - PDF: افتح الملف في Chrome ← طباعة ← حفظ PDF،
+    أو:  node render.js suitiee-proposal.html out.pdf [png_dir]
   ═══════════════════════════════════════════════════════════════════
 -->
 <script type="application/json" id="proposal">
 {
-  "owner": "[اسم المالك]",
-  "date": "[نوفمبر 2026]",
-  "property": {
-    "name": "[اسم العقار]",
-    "location": "[المدينة · الحي]",
-    "facts": [
-      { "k": "نوع العقار", "v": "[عمارة سكنية]" },
-      { "k": "حالة الوحدات", "v": "[مؤثثة / تحتاج تجهيز]" },
-      { "k": "الترخيص", "v": "[ترخيص وزارة السياحة]" }
+  "about": {
+    "title": "عن سويتي",
+    "headline": "نرفع دخل شقتك،\nونصنع تجارب إقامة تستحق التكرار",
+    "paragraphs": [
+      "نساعد ملّاك الشقق والمستثمرين على تحقيق أعلى عائد من وحداتهم من خلال إدارة وتشغيل احترافي للإيجار اليومي، يجمع بين خبرة السوق وكفاءة التشغيل ونظام سويتي الذي يربط كل المنصات في مكان واحد.",
+      "نتولى جميع مراحل التشغيل، من التسويق وإدارة الحجوزات، إلى تجربة الضيف والتنظيف والتقارير المالية، لنحقق عوائد مستدامة وتجربة إقامة مميزة."
+    ]
+  },
+
+  "approach": {
+    "title": "نهجنا",
+    "headline": "رحلة سلسة من الاستثمار\nإلى التشغيل",
+    "paragraphs": [
+      "في سويتي، يتبع كل عقار نموذج تشغيل منظّم مصمم لزيادة العوائد.",
+      "بدءًا من التخطيط الاستثماري وإطلاق العقار، وصولًا إلى العمليات اليومية وتجربة الضيوف، تُدار كل مرحلة بعناية لتحقيق أعلى عائد، وحماية قيمة الأصل، وتقديم ضيافة استثنائية."
     ],
+    "stages": [
+      { "label": "استثمر",     "tiles": ["الاستشارات الاستثمارية", "اختيار العقار", "دراسة الجدوى"] },
+      { "label": "جهّز",       "tiles": ["استخراج تراخيص وزارة السياحة", "التصميم والتأثيث", "التسويق وإنشاء المحتوى", "إدارة المنصات"] },
+      { "label": "شغّل واربح", "tiles": ["ضيافة", "التنظيف والصيانة", "تحسين الإيرادات", "وأكثر"] }
+    ]
+  },
+
+  "stats": {
+    "headline": "نحقق النجاح\nإقامة بعد أخرى",
+    "items": [
+      { "icon": "trend", "value": "[2+]",    "label": "سنين خبرة" },
+      { "icon": "heart", "value": "[4.5+/5]", "label": "تقييم على المنصات" },
+      { "icon": "units", "value": "[24+]",   "label": "وحدات مُدارة" },
+      { "icon": "plus",  "value": "وأكثر",   "label": "" }
+    ]
+  },
+
+  "property": {
+    "city": "[الرياض]",
+    "district": "[حي ...]",
+    "name": "[العمارة B]",
+    "details": "",
     "mapImage": "",
     "photo": ""
   },
 
-  "scenarios": ["متحفظ", "متوازن", "متفائل"],
-  "daysPerYear": 365,
-  "units": [
-    { "name": "استوديو",          "plural": "الاستوديوهات",      "count": 8, "rate": [260, 300, 360], "occupancy": [0.66, 0.66, 0.66] },
-    { "name": "شقة غرفة وصالة",   "plural": "شقق غرفة وصالة",   "count": 7, "rate": [360, 400, 460], "occupancy": [0.66, 0.66, 0.66] }
-  ],
-  "costs": [
-    { "name": "رسوم إدارة سويتي",          "pct": [0.15, 0.15, 0.15] },
-    { "name": "الماء والكهرباء والإنترنت",  "pct": [0.07, 0.07, 0.07] },
-    { "name": "النظافة",                    "pct": [0.05, 0.05, 0.05] },
-    { "name": "الصيانة الدورية",            "pct": [0.03, 0.03, 0.03] }
-  ],
-  "notes": [
-    "متوسط الإشغال المستخدم في الدراسة قابل للزيادة حسب خطة التسويق والتسعير الديناميكي وأداء القنوات.",
-    "الأرقام تقديرية مبنية على أسعار السوق الحالية، وتتحدث بعد أول 90 يوم تشغيل."
-  ],
-
-  "stats": [
-    { "icon": "units",  "value": "[00+]",   "label": "وحدة نديرها" },
-    { "icon": "star",   "value": "[4.8/5]", "label": "متوسط تقييم الضيوف" },
-    { "icon": "cal",    "value": "[00%]",   "label": "متوسط الإشغال" },
-    { "icon": "trend",  "value": "[00+]",   "label": "سنوات خبرة" }
-  ],
+  "finance": {
+    "currencyNote": "العملة المستخدمة هي الريال السعودي",
+    "scenarios": ["المتحفظ", "متوازن", "متفائل"],
+    "daysPerYear": 365,
+    "units": [
+      { "countLabel": "عدد الاستوديوهات",     "rateLabel": "قيمة الإيجار اليومي للاستوديو",       "totalLabel": "إجمالي إيراد الاستوديو بالسنة",            "count": 8, "rate": [260, 300, 360], "occupancy": [0.66, 0.66, 0.66] },
+      { "countLabel": "عدد الشقق غرفة وصالة", "rateLabel": "قيمة الإيجار اليومي للغرفة وصالة",   "totalLabel": "إجمالي إيراد الشقق غرفة وصالة بالسنة",      "count": 7, "rate": [360, 400, 460], "occupancy": [0.66, 0.66, 0.66] }
+    ],
+    "costs": [
+      { "name": "نسبة المشغّل من الدخل",       "pct": [0.15, 0.15, 0.15] },
+      { "name": "الماء والكهرباء والإنترنت",   "pct": [0.07, 0.07, 0.07] },
+      { "name": "النظافة",                     "pct": [0.05, 0.05, 0.05] },
+      { "name": "الصيانة الدورية",             "pct": [0.03, 0.03, 0.03] }
+    ],
+    "notes": [
+      "متوسط الإشغال المستخدم في الدراسة (66%) قابل للزيادة حسب الخطة التسويقية، والتسعير الديناميكي، وتحسين أداء القنوات البيعية."
+    ]
+  },
 
   "contact": {
-    "whatsapp": "[05XXXXXXXX]",
-    "website": "suitiee.com",
-    "instagram": "@suitiee.sa",
-    "legalName": "[الاسم التجاري للمنشأة]",
-    "cr": "[رقم السجل التجاري]"
+    "tagline": "لتشغيل الشقق المفروشة\nوالإيجار اليومي",
+    "phone": "[05XXXXXXXX]",
+    "companyLine": "سويتي لإدارة وتشغيل الشقق المفروشة",
+    "legalName": "[اسم المنشأة بالعربي]",
+    "legalNameEn": "[Company name in English]",
+    "cr": "[0000000000]"
   }
 }
 </script>
 
 <style>
 :root{
-  --ink:#16130F; --ink2:#3B3630; --muted:#6B645B; --muted2:#787165;
-  --line:#E6E3DE; --soft:#FAFAF9; --soft2:#F4F2EF; --paper:#FFFFFF;
-  --acc:#A8481B; --acc-soft:#FCF3EE;
-  --d-bg:#16130F; --d-panel:#211D18; --d-row:#2A2520; --d-line:#3A342D; --d-ink:#FAFAF9; --d-muted:#A39B90; --d-sub:#D6D0C7;
-  --info:#1B5DA6; --info-soft:#EBF2FA; --ok:#0E7150; --ok-soft:#EAF6F1; --warn:#9A6B00; --warn-soft:#FBF3E0;
+  --ink:#16130F; --ink2:#3B3630; --muted:#6B645B;
+  --paper:#F2F0EC; --sand:#E9E5DF; --card:#F7F4F0; --line:#E6E3DE;
+  --acc:#A8481B; --acc-2:#C9774E; --acc-soft:#F6DFD2;
+  --info:#1B5DA6; --ok:#0E7150; --warn:#C08A00;
   --ar:"IBM Plex Sans Arabic","Inter",sans-serif;
   --la:"Inter","IBM Plex Sans Arabic",sans-serif;
+  /* brand tile: rounded "calendar cells" in ink, terracotta seams */
+  --tile:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Crect width='120' height='120' fill='%23A8481B'/%3E%3Crect x='3' y='3' width='54' height='54' rx='16' fill='%2316130F'/%3E%3Crect x='63' y='3' width='54' height='54' rx='16' fill='%2316130F'/%3E%3Crect x='3' y='63' width='54' height='54' rx='16' fill='%2316130F'/%3E%3Crect x='63' y='63' width='54' height='54' rx='16' fill='%2316130F'/%3E%3C/svg%3E");
+  --tile-faint:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cg fill='none' stroke='%2316130F' stroke-width='3'%3E%3Crect x='4' y='4' width='52' height='52' rx='16'/%3E%3Crect x='64' y='4' width='52' height='52' rx='16'/%3E%3Crect x='4' y='64' width='52' height='52' rx='16'/%3E%3Crect x='64' y='64' width='52' height='52' rx='16'/%3E%3C/g%3E%3C/svg%3E");
 }
 *{box-sizing:border-box;margin:0;padding:0}
-html{background:#E9E6E1}
-body{background:#E9E6E1;font-family:var(--ar);color:var(--ink);padding:24px 16px 64px;-webkit-font-smoothing:antialiased}
+html,body{background:#D9D5CF}
+body{font-family:var(--ar);color:var(--ink);padding:24px 16px 64px;-webkit-font-smoothing:antialiased}
 .deck{display:flex;flex-direction:column;align-items:center;gap:24px}
-.frame{width:calc(1920px * var(--z,1));height:calc(1080px * var(--z,1));box-shadow:0 20px 50px -25px rgba(22,19,15,.35);border-radius:6px;overflow:hidden;flex:none}
-.slide{width:1920px;height:1080px;position:relative;overflow:hidden;background:var(--paper);transform:scale(var(--z,1));transform-origin:top right}
-[dir=rtl] .slide{transform-origin:top right}
-
+.frame{width:calc(1920px * var(--z,1));height:calc(1080px * var(--z,1));box-shadow:0 20px 50px -25px rgba(22,19,15,.4);overflow:hidden;flex:none}
+.slide{width:1920px;height:1080px;position:relative;overflow:hidden;transform:scale(var(--z,1));transform-origin:top right}
+.slide > *{position:absolute}
 @page{size:1920px 1080px;margin:0}
 @media print{
   html,body{background:none;padding:0}
-  .deck{gap:0;display:block}
-  .frame{--z:1;width:1920px;height:1080px;box-shadow:none;border-radius:0;break-after:page;page-break-after:always}
+  .deck{display:block}
+  .frame{width:1920px;height:1080px;box-shadow:none;break-after:page;page-break-after:always}
   .frame:last-child{break-after:auto;page-break-after:auto}
   .slide{transform:none}
 }
 
-/* ── shared pieces ─────────────────────────────── */
-.word{font-family:var(--la);font-weight:600;letter-spacing:-.025em;direction:ltr;unicode-bidi:isolate;color:var(--ink);white-space:nowrap}
-.word b{color:var(--acc);font-weight:600}
-.dark .word{color:var(--d-ink)}
-.eyebrow{font-size:28px;font-weight:600;color:var(--acc);display:flex;align-items:center;gap:14px}
-.eyebrow::before{content:"";width:36px;height:4px;border-radius:2px;background:var(--acc)}
-h1{font-weight:600;letter-spacing:-.01em;line-height:1.18;text-wrap:balance}
-.lat{font-family:var(--la);direction:ltr;unicode-bidi:isolate;display:inline-block}
-.ph{background:var(--acc-soft);color:var(--acc);border:2px dashed #E3B8A2;border-radius:10px;padding:0 .3em;font-style:normal;box-decoration-break:clone;-webkit-box-decoration-break:clone}
-.dark .ph{background:#3A2418;color:#F2B898;border-color:#7A3E22}
+.ph{background:rgba(168,72,27,.12);color:var(--acc);outline:2px dashed rgba(168,72,27,.55);outline-offset:2px;border-radius:8px;padding:0 .2em;font-style:normal;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+.dark .ph{background:rgba(246,223,210,.12);color:#F2B898;outline-color:rgba(242,184,152,.6)}
+.dark .statcard .ph,.dark .info .ph{background:rgba(168,72,27,.1);color:var(--acc);outline-color:rgba(168,72,27,.5)}
+.lat{font-family:var(--la);direction:ltr;unicode-bidi:isolate}
 
-.foot{position:absolute;inset-inline:96px;bottom:44px;display:flex;justify-content:space-between;align-items:center;font-size:22px;color:var(--muted2)}
-.foot .word{font-size:28px}
-.foot .pg{font-family:var(--la);font-weight:500}
-.dark .foot{color:var(--d-muted)}
+/* Suitiee logo lockup (replaces the reference mark) */
+.logo{display:flex;flex-direction:column;align-items:flex-end;gap:6px}
+.logo .word{font-family:var(--la);font-weight:600;letter-spacing:-.035em;direction:ltr;line-height:.9;color:var(--ink)}
+.logo .word b{color:var(--acc);font-weight:600}
+.logo .ar{color:var(--muted);font-weight:500}
+.logo .bar{height:10px;border-radius:5px;background:var(--acc)}
 
-/* calendar motif (brand texture, from the Suitiee ad panels) */
-.cal{display:grid;gap:10px;font-size:20px}
-.cal .d{text-align:center;color:var(--muted2);font-family:var(--la);font-weight:500}
-.cal .u{color:var(--ink2);display:flex;align-items:center;font-size:22px;white-space:nowrap}
-.cal .c{border-radius:12px;background:var(--paper);border:2px solid var(--line)}
-.cal .bar{border-radius:12px;display:flex;align-items:center;justify-content:center;font-weight:600;font-family:var(--la);white-space:nowrap;overflow:hidden}
-.b-acc{background:var(--acc-soft);color:var(--acc)} .b-info{background:var(--info-soft);color:var(--info)} .b-ok{background:var(--ok-soft);color:var(--ok)}
+/* ── 1 & 7: textured paper with faint brand band ── */
+.paper{background:var(--paper)}
+.paper .grain{inset:0;opacity:.5;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.012' numOctaves='3' seed='4'/%3E%3CfeColorMatrix values='0 0 0 0 .55 0 0 0 0 .52 0 0 0 0 .48 0 0 0 .18 0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");background-size:900px}
+.paper .band{inset-inline:-200px;bottom:-60px;height:420px;background-image:var(--tile-faint);background-size:150px;opacity:.07;transform:rotate(-4deg);-webkit-mask-image:linear-gradient(to top,#000 30%,transparent);mask-image:linear-gradient(to top,#000 30%,transparent)}
+.cover .logo{right:170px;top:290px}
+.cover .logo .word{font-size:270px}
+.cover .logo .ar{font-size:64px;margin-top:10px}
+.cover .logo .bar{width:300px;margin-top:22px}
 
-/* ── 1. cover ──────────────────────────────────── */
-.cover{display:grid;grid-template-columns:1fr 820px;gap:96px;padding:96px;align-items:center}
-.cover .id .word{font-size:200px;line-height:1}
-.cover .id .ar{font-size:44px;color:var(--muted);margin-top:8px}
-.cover .tag{font-size:56px;font-weight:600;line-height:1.25;margin-top:72px;max-width:16ch;text-wrap:balance}
-.cover .for{margin-top:72px;display:flex;flex-direction:column;gap:14px;font-size:30px;color:var(--ink2)}
-.cover .for span{color:var(--muted2);font-size:24px;display:block;margin-bottom:2px}
-.cover .for .row{display:flex;gap:64px}
-.cover .panel{background:var(--soft);border:2px solid var(--line);border-radius:36px;padding:44px;box-shadow:0 40px 80px -40px rgba(22,19,15,.3);display:flex;flex-direction:column;gap:28px}
-.cover .ph-head{display:flex;justify-content:space-between;align-items:center;font-size:24px;color:var(--muted)}
-.cover .ph-head strong{color:var(--ink);font-size:30px;font-weight:600}
-.cover .sync{display:flex;align-items:center;justify-content:space-between;background:var(--paper);border:2px solid var(--line);border-radius:20px;padding:20px 26px;font-size:26px}
-.chip{border-radius:999px;padding:6px 18px;font-size:22px;font-weight:600;white-space:nowrap}
-.c-ok{background:var(--ok-soft);color:var(--ok)}
+.close .logo{right:170px;top:300px}
+.close .logo .word{font-size:230px}
+.close .logo .ar{font-size:56px;margin-top:8px}
+.close .logo .bar{width:260px;margin-top:18px}
+.close .info{left:120px;width:780px;top:300px;text-align:center;display:flex;flex-direction:column;align-items:center}
+.close .info h2{font-size:64px;font-weight:700;line-height:1.12;white-space:pre-line}
+.close .info .phone{font-family:var(--la);font-size:64px;font-weight:500;margin-top:34px;direction:ltr;letter-spacing:.01em}
+.close .info .co{font-size:31px;line-height:1.45;margin-top:34px;color:var(--ink2)}
 
-/* ── 2. about ──────────────────────────────────── */
-.about{display:grid;grid-template-columns:1fr 760px;gap:112px;padding:120px 96px 140px}
-.about h1{font-size:80px;margin-top:28px}
-.about p{font-size:31px;line-height:1.75;color:var(--ink2);margin-top:36px;max-width:36ch}
-.about .cards{display:flex;flex-direction:column;gap:28px;justify-content:center}
-.card{background:var(--soft);border:2px solid var(--line);border-radius:28px;padding:40px 44px}
-.card .k{display:inline-block;font-size:22px;font-weight:600;border-radius:999px;padding:6px 18px;background:var(--paper);border:2px solid var(--line);color:var(--muted)}
-.card h3{font-size:42px;font-weight:600;margin-top:20px}
-.card p{font-size:27px;color:var(--muted);margin-top:10px;line-height:1.6;max-width:none}
-.card .chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
-.card .chips span{font-size:22px;font-weight:500;background:var(--paper);border:2px solid var(--line);border-radius:999px;padding:6px 18px;color:var(--ink2)}
-.card.main{background:var(--ink);border-color:var(--ink);color:var(--d-ink)}
-.card.main .k{background:var(--acc);border-color:var(--acc);color:#fff}
-.card.main p{color:var(--d-sub)}
-.card.main .chips span{background:var(--d-row);border-color:var(--d-line);color:var(--d-ink)}
-.rail{position:absolute;inset-block:120px 140px;inset-inline-end:0;width:14px;background:var(--acc);border-radius:7px 0 0 7px}
+/* ── 2 & 3: sand slides with tile strip ── */
+.sand{background:var(--sand)}
+.strip{background-image:var(--tile);background-size:120px;background-position:center;border-radius:0 10px 0 62px;overflow:hidden}
+.copy h3{font-size:46px;font-weight:700}
+.copy h1{font-size:70px;font-weight:700;line-height:1.14;white-space:pre-line;letter-spacing:-.005em}
+.copy p{font-size:30px;line-height:1.45;color:var(--ink2)}
 
-/* ── 3. approach ───────────────────────────────── */
-.approach{padding:100px 96px 140px;display:flex;flex-direction:column;gap:56px}
-.approach .top{display:grid;grid-template-columns:1fr 1fr;gap:96px;align-items:end}
-.approach h1{font-size:72px;margin-top:24px}
-.approach .top p{font-size:29px;line-height:1.7;color:var(--ink2)}
-.stages{display:grid;grid-template-columns:1fr 64px 1fr 64px 1fr;align-items:stretch;flex:1}
-.stage{display:flex;flex-direction:column;gap:16px}
-.stage .sh{display:flex;align-items:center;gap:18px;margin-bottom:8px}
-.stage .n{width:60px;height:60px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--la);font-weight:600;font-size:28px;background:var(--ink);color:#fff;flex:none}
-.stage .sh b{font-size:36px;font-weight:600;display:block}
-.stage .sh small{font-size:22px;color:var(--muted2);display:block}
-.tile{flex:1;border-radius:20px;display:flex;align-items:center;padding:0 30px;font-size:28px;font-weight:600;background:var(--soft2);border:2px solid var(--line)}
-.tile i{font-style:normal;font-family:var(--la);font-weight:500;color:var(--muted2);font-size:22px;margin-inline-start:auto}
-.stage.mid .tile{background:var(--ink);border-color:var(--ink);color:var(--d-ink)}
-.stage.mid .tile i{color:var(--d-muted)}
-.stage.mid .n{background:var(--acc)}
-.arrow{display:flex;align-items:center;justify-content:center}
-.arrow svg{width:44px;height:44px;color:var(--muted2)}
+.about .poly{left:0;top:0;width:760px;height:1080px;clip-path:polygon(0 230px,742px 520px,520px 1080px,0 1080px);overflow:hidden}
+.about .poly::before{content:"";position:absolute;inset:-400px;background-image:var(--tile);background-size:150px;transform:rotate(-23deg)}
+.about .strip{right:90px;top:199px;width:62px;height:686px}
+.about .copy{right:200px;top:230px;width:940px;display:flex;flex-direction:column;gap:30px}
+.about .copy h1{margin-top:4px}
+.about .copy p + p{margin-top:8px}
 
-/* ── 4. stats (dark) ───────────────────────────── */
-.dark{background:var(--d-bg);color:var(--d-ink)}
-.stats{padding:110px 96px 150px;display:flex;flex-direction:column;align-items:center;gap:80px}
-.stats .head{text-align:center;display:flex;flex-direction:column;align-items:center;gap:24px}
-.stats .eyebrow{justify-content:center}
-.stats h1{font-size:80px}
-.stats .sub{font-size:30px;color:var(--d-sub)}
-.statgrid{width:100%;display:grid;grid-template-columns:repeat(4,1fr);background:var(--d-panel);border:2px solid var(--d-line);border-radius:36px;flex:1}
-.stat{padding:56px 48px;display:flex;flex-direction:column;justify-content:center;gap:28px;border-inline-start:2px solid var(--d-line)}
-.stat:first-child{border-inline-start:0}
-.stat .ic{width:76px;height:76px;border-radius:20px;background:var(--d-row);border:2px solid var(--d-line);display:flex;align-items:center;justify-content:center;color:#F2B898}
-.stat .ic svg{width:38px;height:38px}
-.stat .v{font-family:var(--la);font-weight:600;font-size:96px;line-height:1;direction:ltr;text-align:right;letter-spacing:-.02em}
-.stat .v .ph{font-size:72px;border-radius:14px}
-.stat .l{font-size:30px;color:var(--d-sub)}
+.approach .strip{right:48px;top:60px;width:62px;height:818px}
+.approach .copy{right:165px;top:78px;width:720px;display:flex;flex-direction:column;gap:22px}
+.approach .copy h1{font-size:68px;margin-top:62px;margin-bottom:46px}
+.approach .copy p + p{margin-top:16px}
+.tile{width:180px;height:180px;display:flex;align-items:center;justify-content:center;text-align:center;font-size:27px;font-weight:700;line-height:1.3;padding:10px;color:#fff;border-radius:4px}
+.tile.a{background:var(--acc)} .tile.b{background:var(--ink)}
+.vlabel{writing-mode:vertical-rl;font-size:44px;font-weight:600;line-height:1;white-space:nowrap}
+.flow{inset:0;width:1920px;height:1080px;pointer-events:none}
 
-/* ── 5. property (dark) ────────────────────────── */
-.prop{display:grid;grid-template-columns:760px 1fr;grid-template-rows:auto 1fr;gap:32px;padding:88px 96px 140px}
-.prop .info{background:var(--soft);color:var(--ink);border-radius:32px;padding:48px 52px;display:flex;flex-direction:column;gap:22px}
-.prop .info .eyebrow{font-size:24px}
-.prop .info h2{font-size:56px;font-weight:600;line-height:1.2}
-.prop .loc{display:flex;align-items:center;gap:12px;font-size:28px;color:var(--ink2)}
-.prop .loc svg{width:30px;height:30px;color:var(--acc);flex:none}
-.prop .mix{display:flex;flex-wrap:wrap;gap:12px}
-.prop .mix span{font-size:24px;font-weight:600;background:var(--paper);border:2px solid var(--line);border-radius:999px;padding:8px 20px}
-.prop .mix b{font-family:var(--la);color:var(--acc);margin-inline-end:6px}
-.prop dl{display:grid;grid-template-columns:auto 1fr;gap:12px 28px;font-size:25px;border-top:2px solid var(--line);padding-top:22px}
-.prop dt{color:var(--muted2)} .prop dd{font-weight:500}
-.slot{border-radius:32px;overflow:hidden;background:var(--d-panel);border:2px dashed var(--d-line);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:16px;color:var(--d-muted);font-size:28px;position:relative}
-.slot svg{width:64px;height:64px;opacity:.7}
-.slot small{font-size:20px;font-family:var(--la);direction:ltr}
-.slot.has{border:0}
-.slot img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.prop .map{grid-row:1 / span 2;grid-column:2;display:flex}
-.prop .photo{grid-column:1;grid-row:2;display:flex}
-.prop .slot{flex:1}
+/* ── 4 & 5: dark slides with layered shards ── */
+.dark{background:var(--ink);color:#FAFAF9}
+.shard{border-radius:22px;transform:skewX(-17deg)}
+.dark h1{font-size:68px;font-weight:700;line-height:1.12;white-space:pre-line;text-align:center;left:0;right:0;top:86px}
+.statcard{left:302px;top:287px;width:1314px;height:698px;background:var(--card);border-radius:14px;color:var(--ink)}
+.statcard .hl{position:absolute;left:58px;right:58px;top:348px;height:2px;background:var(--acc)}
+.statcard .vl{position:absolute;left:656px;width:2px;background:var(--acc)}
+.cell{position:absolute;width:520px;height:250px;display:flex;flex-direction:column;align-items:flex-end;justify-content:center}
+.cell .top{display:flex;align-items:center;gap:30px;flex-direction:row}
+.cell .v{font-family:var(--la);font-weight:800;font-size:104px;line-height:1;letter-spacing:-.02em;direction:ltr}
+.cell .v.ar{font-family:var(--ar);font-weight:700;font-size:110px;letter-spacing:0;direction:rtl}
+.cell .ic{width:90px;height:90px;border-radius:8px;background:var(--acc-soft);color:var(--acc);display:flex;align-items:center;justify-content:center;flex:none}
+.cell .ic svg{width:46px;height:46px}
+.cell .l{font-size:36px;font-weight:700;margin-top:6px;margin-inline-end:120px}
 
-/* ── 6. financial study ────────────────────────── */
-.fin .foot{display:none}
-.fin{padding:56px 96px 56px;display:flex;flex-direction:column;gap:20px}
-.fin .top{display:flex;justify-content:space-between;align-items:flex-end;gap:48px}
-.fin h1{font-size:52px;margin-top:10px}
-.fin .meta{font-size:24px;color:var(--muted);text-align:left;line-height:1.6}
-.fin .meta b{color:var(--ink);font-weight:600}
-table{width:100%;border-collapse:separate;border-spacing:0;font-size:24px}
-th,td{height:var(--rh,42px);padding:0 24px;text-align:right;white-space:nowrap}
-td.n,th.n{text-align:center;font-family:var(--la);font-variant-numeric:tabular-nums;width:300px;direction:ltr}
-thead th{height:56px;font-size:26px;font-weight:600;vertical-align:middle}
-thead th.n{text-align:center;font-family:var(--ar)}
-thead th.n span{display:inline-flex;align-items:center;gap:12px;border-radius:999px;padding:8px 24px}
-thead th.n span::before{content:"";width:12px;height:12px;border-radius:50%;background:currentColor}
-.s0{background:var(--info-soft);color:var(--info)} .s1{background:var(--ok-soft);color:var(--ok)} .s2{background:var(--warn-soft);color:var(--warn)}
-thead th:first-child{font-size:20px;color:var(--muted2);font-weight:500}
-tbody td{border-bottom:1.5px solid var(--line);color:var(--ink2)}
-tr.grp td{background:var(--soft2);font-weight:600;color:var(--ink);border-bottom:0;font-size:24px}
-tr.grp td:first-child{border-radius:0 12px 12px 0} tr.grp td:last-child{border-radius:12px 0 0 12px}
-tr.grp td small{font-weight:500;color:var(--muted2);font-size:21px;margin-inline-start:10px}
-tr.sub td{font-weight:600;color:var(--ink)}
-tr.tot td{font-weight:700;color:var(--ink);border-bottom:2px solid var(--ink)}
-td .pct{color:var(--muted2);font-weight:500;font-size:19px;margin-inline-end:12px}
-tr.net td{height:64px;background:var(--ink);color:var(--d-ink);font-size:30px;font-weight:700;border:0}
-tr.net td.n{color:#fff;font-size:34px}
-tr.net td:first-child{border-radius:0 18px 18px 0} tr.net td:last-child{border-radius:18px 0 0 18px}
-tr.net td:first-child::after{content:"";display:inline-block;width:12px;height:12px;border-radius:50%;background:var(--acc);margin-inline-start:16px;vertical-align:middle}
-tr.mo td{color:var(--muted);border:0;font-size:23px}
-tr.mo td.n{color:var(--ink);font-weight:600}
-tr.gap td{height:8px;border:0;padding:0}
-.notes{display:flex;gap:18px;font-size:20px;color:var(--muted);line-height:1.5;border-top:2px solid var(--line);padding-top:14px}
-.notes b{color:var(--ink);font-weight:600;white-space:nowrap}
-.notes ul{list-style:none;display:flex;flex-direction:column;gap:2px}
-.notes li::before{content:"· ";color:var(--acc);font-weight:700}
+.prop .box{border:6px solid var(--card);background:#2A2520;overflow:hidden;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:14px;color:#A39B90;font-size:28px}
+.prop .box svg{width:70px;height:70px;opacity:.7}
+.prop .box small{font-family:var(--la);font-size:20px;direction:ltr}
+.prop .box img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.prop .map{left:163px;top:84px;width:674px;height:911px}
+.prop .photo{left:859px;top:470px;width:898px;height:525px}
+.prop .info{left:859px;top:84px;width:898px;height:364px;background:var(--card);color:var(--ink);padding:44px 50px;font-size:42px}
+.prop .info .t{display:flex;gap:28px;justify-content:flex-start}
+.prop .info .d{font-size:28px;color:var(--ink2);margin-top:22px;line-height:1.5}
 
-/* ── 7. closing ────────────────────────────────── */
-.close{display:grid;grid-template-columns:1fr 760px;gap:112px;padding:110px 96px 96px;align-items:center}
-.close .word{font-size:150px;line-height:1}
-.close h1{font-size:68px;margin-top:56px;max-width:15ch}
-.close .cta{display:inline-flex;margin-top:48px;background:var(--acc);color:#fff;border-radius:18px;padding:26px 44px;font-size:34px;font-weight:600}
-.close .legal{margin-top:64px;font-size:22px;color:var(--muted2);line-height:1.7}
-.contacts{display:flex;flex-direction:column;gap:20px}
-.ct{display:flex;align-items:center;gap:26px;background:var(--soft);border:2px solid var(--line);border-radius:26px;padding:30px 36px}
-.ct .ic{width:72px;height:72px;border-radius:20px;background:var(--paper);border:2px solid var(--line);display:flex;align-items:center;justify-content:center;color:var(--acc);flex:none}
-.ct .ic svg{width:36px;height:36px}
-.ct small{display:block;font-size:22px;color:var(--muted2)}
-.ct b{display:block;font-size:36px;font-weight:600;margin-top:2px}
-.ct b.lat{font-family:var(--la);letter-spacing:-.01em}
+/* ── 6: financial study sheet ── */
+.fin{background:#fff}
+.sheet{left:56px;right:56px;top:22px;bottom:22px;display:flex;flex-direction:column;border-inline:2px solid var(--ink);border-bottom:2px solid var(--ink)}
+.sheet .title{background:var(--ink);color:#fff;text-align:center;font-size:42px;font-weight:700;height:66px;display:flex;align-items:center;justify-content:center;border-bottom:3px solid #000}
+.sheet .sec{text-align:center;font-size:34px;font-weight:700;height:var(--sh,54px);display:flex;align-items:center;justify-content:center;border-bottom:3px solid var(--ink)}
+.sheet .row{display:grid;grid-template-columns:1fr 330px 330px 330px;height:var(--rh,40px);font-size:28px}
+.sheet .row > div{display:flex;align-items:center;padding:0 18px}
+.sheet .row > div:first-child{justify-content:flex-start}
+.sheet .row > div.n{justify-content:flex-end;font-family:var(--la);direction:ltr;font-variant-numeric:tabular-nums}
+.sheet .row .n.c0{border-right:9px solid var(--info)}
+.sheet .row .n.c1{border-right:9px solid var(--ok)}
+.sheet .row .n.c2{border-right:9px solid var(--warn)}
+.sheet .row{border-bottom:2px solid #DADADA}
+.sheet .row:nth-of-type(odd){background:#F1F0EE}
+.sheet .row.head{font-weight:700;font-size:30px}
+.sheet .row.head .n{justify-content:center;font-family:var(--ar);direction:rtl}
+.sheet .row.bold{font-weight:700;font-size:30px;border-bottom:6px double var(--ink)}
+.sheet .row.net{font-weight:700;font-size:36px;height:62px;background:#fff;border-bottom:6px double var(--ink);border-top:4px solid var(--ink)}
+.sheet .row.net > div:first-child{color:var(--acc)}
+.sheet .row.foot{background:#fff;font-size:28px}
+.sheet .notes{flex:1;padding:10px 18px;font-size:27px;line-height:1.55;border-top:2px solid var(--ink)}
+.sheet .notes b{font-weight:500;display:block}
 </style>
 </head>
 <body>
@@ -264,222 +230,141 @@ tr.gap td{height:8px;border:0;padding:0}
 (function(){
   const D = JSON.parse(document.getElementById('proposal').textContent);
   const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-  // any value starting with "[" is a placeholder to fill
   const t = s => { s = String(s ?? ''); return s.trim().startsWith('[') ? `<em class="ph">${esc(s.replace(/^\s*\[|\]\s*$/g,''))}</em>` : esc(s); };
-  const num = n => Math.round(n).toLocaleString('en-US');
+  const num = n => Math.round(n).toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2});
   const pct = p => `${Math.round(p*1000)/10}%`;
-  const WORD = '<span class="word">Suit<b>i</b>ee</span>';
-  const N = D.scenarios.length;
+  const LOGO = `<div class="logo"><span class="word">Suit<b>i</b>ee</span><span class="ar">سويتي</span><span class="bar"></span></div>`;
 
   const ICON = {
-    trend:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg>',
-    star:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/></svg>',
-    units:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M4 21V5l8-3 8 3v16"/><path d="M9 21v-4h6v4M8 8h2M14 8h2M8 12h2M14 12h2"/><path d="M2 21h20"/></svg>',
-    cal:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>',
-    pin:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 22s7-6.2 7-12a7 7 0 10-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg>',
-    img:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="3"/><circle cx="9" cy="10" r="2"/><path d="M21 16l-5-5-9 9"/></svg>',
+    trend:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg>',
+    heart:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-8-5.2-8-11a4.6 4.6 0 018-3 4.6 4.6 0 018 3c0 5.8-8 11-8 11z"/></svg>',
+    units:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg>',
+    plus:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 6v12M6 12h12"/></svg>',
+    star:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/></svg>',
     map:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M9 4L3 6v14l6-2 6 2 6-2V4l-6 2z"/><path d="M9 4v14M15 6v14"/></svg>',
-    wa:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M4 20l1.3-3.9A8 8 0 1112 20a8 8 0 01-3.9-1z"/><path d="M9 9.5c.3 2 1.8 3.8 4 4.6l1.2-1.2 1.8.8-.4 1.6c-3.6 0-7-3.2-7.2-6.8L10 8l.8 1.8z" fill="currentColor" stroke-width="1"/></svg>',
-    web:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.7 2.5 15.3 0 18M12 3c-2.5 2.7-2.5 15.3 0 18"/></svg>',
-    ig:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>',
-    arrow:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-dasharray="3 3"><path d="M20 12H4"/><path d="M9 7l-5 5 5 5" stroke-dasharray="none"/></svg>'
+    img:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="3"/><circle cx="9" cy="10" r="2"/><path d="M21 16l-5-5-9 9"/></svg>'
   };
-
-  // brand calendar motif
-  function calendar(rows, {cell=58, unitW=150, label=true} = {}){
-    const days = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
-    let h = `<div class="cal" style="grid-template-columns:${label?unitW+'px ':''}repeat(7,1fr);grid-auto-rows:${cell}px">`;
-    h += (label?'<span></span>':'') + days.map(d=>`<span class="d" style="align-self:center">${d}</span>`).join('');
-    rows.forEach(([name, bars]) => {
-      if(label) h += `<span class="u">${esc(name)}</span>`;
-      let col = 0;
-      bars.forEach(([s,n,lab,c]) => {
-        while(col < s){ h += '<span class="c"></span>'; col++; }
-        h += `<span class="bar ${c}" style="grid-column:span ${n}">${esc(lab)}</span>`; col += n;
-      });
-      while(col < 7){ h += '<span class="c"></span>'; col++; }
-    });
-    return h + '</div>';
-  }
-  const CAL_ROWS = [
-    ['شقة 101', [[0,3,'Airbnb','b-acc'],[4,3,'Booking','b-info']]],
-    ['شقة 102', [[1,2,'Gathern','b-ok'],[3,4,'Airbnb','b-acc']]],
-    ['استوديو 1', [[0,2,'Booking','b-info'],[2,3,'Gathern','b-ok']]],
-    ['استوديو 2', [[2,5,'Airbnb','b-acc']]],
-    ['استوديو 3', [[0,4,'Gathern','b-ok'],[5,2,'Booking','b-info']]]
-  ];
-
-  // ── financial model ──
-  const days = D.daysPerYear || 365;
-  const unitRev = D.units.map(u => D.scenarios.map((_,i) => u.count * u.rate[i] * days * u.occupancy[i]));
-  const totRev  = D.scenarios.map((_,i) => unitRev.reduce((a,r) => a + r[i], 0));
-  const costAmt = D.costs.map(c => D.scenarios.map((_,i) => totRev[i] * c.pct[i]));
-  const totCost = D.scenarios.map((_,i) => costAmt.reduce((a,r) => a + r[i], 0));
-  const net     = D.scenarios.map((_,i) => totRev[i] - totCost[i]);
-  const totalUnits = D.units.reduce((a,u)=>a+u.count,0);
+  const shards = (corner) => {
+    // layered skewed panels, same composition as the reference, in Suitiee warm tones
+    const L = corner === 'tr'
+      ? [[1515,-30,520,170,'#3A342D'],[1660,-30,420,330,'rgba(168,72,27,.55)'],[1800,-30,300,480,'rgba(214,208,199,.38)'],[1640,140,380,170,'rgba(214,208,199,.18)']]
+      : [[-140,560,330,560,'#3A342D'],[-160,720,380,420,'rgba(168,72,27,.55)'],[-180,860,620,300,'rgba(214,208,199,.38)'],[60,960,500,160,'rgba(214,208,199,.18)']];
+    return L.map(([x,y,w,h,c]) => `<div class="shard" style="left:${x}px;top:${y}px;width:${w}px;height:${h}px;background:${c}"></div>`).join('');
+  };
 
   const slides = [];
-  let page = 0;
-  const foot = (dark) => `<div class="foot">${WORD}<span>عرض تشغيل · ${t(D.property.name)}</span><span class="pg">${String(page).padStart(2,'0')}</span></div>`;
 
-  // 1. cover
-  page++;
-  slides.push(`<section class="slide cover">
-    <div class="id">
-      ${WORD.replace('class="word"','class="word"')}
-      <div class="ar">سويتي</div>
-      <h1 class="tag">إدارة وتشغيل شقق الإيجار اليومي</h1>
-      <div class="for">
-        <div class="row">
-          <div><span>عرض مقدّم إلى</span>${t(D.owner)}</div>
-          <div><span>العقار</span>${t(D.property.name)}</div>
-          <div><span>التاريخ</span>${t(D.date)}</div>
-        </div>
-      </div>
-    </div>
-    <div class="panel">
-      <div class="ph-head"><strong>تقويم واحد لكل الوحدات</strong><span>هذا الأسبوع</span></div>
-      ${calendar(CAL_ROWS)}
-      <div class="sync"><span>كل المنصات متزامنة · بدون حجز مكرر</span><span class="chip c-ok">متزامن</span></div>
+  // 1 · cover
+  slides.push(`<section class="slide paper cover"><div class="grain"></div><div class="band"></div>${LOGO}</section>`);
+
+  // 2 · about
+  const A = D.about;
+  slides.push(`<section class="slide sand about">
+    <div class="poly"></div>
+    <div class="strip"></div>
+    <div class="copy">
+      <h3>${esc(A.title)}</h3>
+      <h1>${esc(A.headline)}</h1>
+      ${A.paragraphs.map(p=>`<p>${t(p)}</p>`).join('')}
     </div>
   </section>`);
 
-  // 2. about
-  page++;
-  slides.push(`<section class="slide about">
-    <div>
-      <div class="eyebrow">عن سويتي</div>
-      <h1>نرفع دخل شقتك،<br>ونريّحك من تشغيلها</h1>
-      <p>سويتي تدير وتشغّل شقق الإيجار اليومي نيابةً عن ملّاكها. نتولى كل شي من الإعلان على المنصات والتسعير، إلى استقبال الضيوف والتنظيف والصيانة.</p>
-      <p>وكل شهر يوصلك تقرير واضح بالحجوزات والإيرادات والمصاريف، وأنت تتابع من مكانك.</p>
+  // 3 · approach (tiles + dashed flow, same frame as the reference)
+  const P = D.approach;
+  const colX = [751, 418, 84], rowY = [108, 336, 563, 789], cls = ['a','b','a'];
+  let tiles = '';
+  P.stages.forEach((s, c) => s.tiles.slice(0,4).forEach((x, r) => {
+    tiles += `<div class="tile ${cls[c]}" style="left:${colX[c]}px;top:${rowY[r]}px">${esc(x)}</div>`;
+  }));
+  slides.push(`<section class="slide sand approach">
+    <div class="strip"></div>
+    <div class="copy">
+      <h3>${esc(P.title)}</h3>
+      <h1>${esc(P.headline)}</h1>
+      ${P.paragraphs.map(p=>`<p>${t(p)}</p>`).join('')}
     </div>
-    <div class="cards">
-      <div class="card main">
-        <span class="k">الخيار الأول</span>
-        <h3>الإدارة الكاملة</h3>
-        <p>نستلم الشقة ونشغّلها بالكامل، من أول إعلان إلى تحويل صافي الأرباح.</p>
-        <div class="chips"><span>القنوات والتسعير</span><span>الضيوف</span><span>التنظيف</span><span>الصيانة</span><span>التقرير الشهري</span></div>
-      </div>
-      <div class="card">
-        <span class="k">الخيار الثاني</span>
-        <h3>إدارة القنوات</h3>
-        <p>نعلن ونسعّر ونرد على الحجوزات، والتشغيل اليومي يبقى عندك.</p>
-        <div class="chips"><span class="lat">Airbnb</span><span class="lat">Booking</span><span>جاذر إن</span><span>التسعير الديناميكي</span></div>
-      </div>
-    </div>
-    <div class="rail"></div>
-    ${foot()}
+    ${tiles}
+    <div class="vlabel" style="left:952px;top:122px">${esc(P.stages[0].label)}</div>
+    <div class="vlabel" style="left:618px;top:770px">${esc(P.stages[1].label)}</div>
+    <div class="vlabel" style="left:278px;top:122px">${esc(P.stages[2].label)}</div>
+    <svg class="flow" viewBox="0 0 1920 1080" fill="none" stroke="#16130F" stroke-width="2.5" stroke-dasharray="7 7">
+      <defs><marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#16130F" stroke="none"/></marker></defs>
+      <path d="M966 270V775H668" marker-end="url(#ah)"/>
+      <path d="M632 838V1002H300V340" marker-end="url(#ah)"/>
+    </svg>
   </section>`);
 
-  // 3. approach
-  page++;
-  const stage = (n, name, sub, tiles, cls='') => `<div class="stage ${cls}">
-      <div class="sh"><span class="n">${n}</span><div><b>${name}</b><small>${sub}</small></div></div>
-      ${tiles.map(x=>`<div class="tile">${x}</div>`).join('')}
-    </div>`;
-  slides.push(`<section class="slide approach">
-    <div class="top">
-      <div><div class="eyebrow">نهجنا</div><h1>رحلة واضحة من الدراسة<br>إلى أول حجز… وبعده</h1></div>
-      <p>كل عقار يمشي على نموذج تشغيل منظّم: نبدأ بالأرقام، نجهّز الوحدة والقنوات، ثم نشغّل يوميًا بمعايير ثابتة تحمي قيمة الأصل وترفع العائد.</p>
-    </div>
-    <div class="stages">
-      ${stage(1,'ندرس','قبل ما نبدأ',['دراسة الجدوى','اختيار نموذج التشغيل','التسعير المقترح','قائمة التجهيز والتأثيث'])}
-      <div class="arrow">${ICON.arrow}</div>
-      ${stage(2,'نجهّز','أول 30 يوم',['ترخيص وزارة السياحة','التصوير وكتابة الإعلان','ربط المنصات بتقويم واحد','الدخول الذاتي والتجهيزات'],'mid')}
-      <div class="arrow">${ICON.arrow}</div>
-      ${stage(3,'نشغّل ونحقق الربح','كل يوم',['استقبال الضيوف والرد 24/7','تنظيف موثّق بالصور','الصيانة الدورية','تسعير ديناميكي وتقرير شهري'])}
-    </div>
-    ${foot()}
-  </section>`);
+  // 4 · stats
+  const S = D.stats;
 
-  // 4. stats
-  page++;
   slides.push(`<section class="slide dark stats">
-    <div class="head">
-      <div class="eyebrow">سويتي بالأرقام</div>
-      <h1>نتائج تتكرر… حجز بعد حجز</h1>
-      <div class="sub">أرقام تشغيلية من الوحدات اللي نديرها اليوم.</div>
+    ${shards('tr')}${shards('bl')}
+    <h1>${esc(S.headline)}</h1>
+    <div class="statcard">
+      <div class="hl"></div>
+      <div class="vl" style="top:60px;height:250px"></div>
+      <div class="vl" style="top:410px;height:250px"></div>
+      ${S.items.slice(0,4).map((s,i)=>{
+        const isAr = /[؀-ۿ]/.test(s.value) && !String(s.value).trim().startsWith('[');
+        return `<div class="cell" style="${i%2===0?'right':'left'}:${i%2===0?58:150}px;top:${i<2?62:410}px">
+             <div class="top"><span class="ic">${ICON[s.icon]||ICON.plus}</span><span class="v${isAr?' ar':''}">${t(s.value)}</span></div>
+             ${s.label?`<div class="l">${t(s.label)}</div>`:''}
+           </div>`;
+      }).join('')}
     </div>
-    <div class="statgrid">
-      ${D.stats.map(s=>`<div class="stat"><span class="ic">${ICON[s.icon]||ICON.trend}</span><div class="v">${t(s.value)}</div><div class="l">${t(s.label)}</div></div>`).join('')}
-    </div>
-    ${foot(true)}
   </section>`);
 
-  // 5. property
-  page++;
-  const slot = (src, icon, label) => src
-    ? `<div class="slot has"><img src="${esc(src)}" alt=""></div>`
-    : `<div class="slot">${ICON[icon]}<span>${label}</span><small>property.${icon==='map'?'mapImage':'photo'}</small></div>`;
+  // 5 · property
+  const R = D.property;
+  const box = (src, cls, icon, label, key) => src
+    ? `<div class="box ${cls}"><img src="${esc(src)}" alt=""></div>`
+    : `<div class="box ${cls}">${ICON[icon]}<span>${label}</span><small>property.${key}</small></div>`;
   slides.push(`<section class="slide dark prop">
+    ${shards('tr')}${shards('bl')}
+    ${box(R.mapImage,'map','map','صورة الموقع على الخريطة','mapImage')}
+    <div class="info"><div class="t"><span>${t(R.city)}</span><span>${t(R.district)}</span><span>${t(R.name)}</span></div>${R.details?`<div class="d">${t(R.details)}</div>`:''}</div>
+    ${box(R.photo,'photo','img','صورة واجهة العقار','photo')}
+  </section>`);
+
+  // 6 · financial study
+  const F = D.finance, N = F.scenarios.length, days = F.daysPerYear || 365;
+  const unitRev = F.units.map(u => F.scenarios.map((_,i) => u.count * u.rate[i] * days * u.occupancy[i]));
+  const totRev  = F.scenarios.map((_,i) => unitRev.reduce((a,r) => a + r[i], 0));
+  const totCost = F.scenarios.map((_,i) => F.costs.reduce((a,c) => a + totRev[i] * c.pct[i], 0));
+  const net     = F.scenarios.map((_,i) => totRev[i] - totCost[i]);
+  const row = (label, vals, cls='') => `<div class="row ${cls}"><div>${label}</div>${vals.map((v,i)=>`<div class="n c${i%3}">${v}</div>`).join('')}</div>`;
+  let sheet = `<div class="title">الدراسة المالية</div><div class="sec">الإيراد المتوقع السنوي</div>`;
+  sheet += row(esc(F.currencyNote), F.scenarios.map(esc), 'head');
+  F.units.forEach((u,k) => {
+    sheet += row(esc(u.countLabel), F.scenarios.map(()=>u.count));
+    sheet += row(esc(u.rateLabel), u.rate.map(v=>v));
+    sheet += row('متوسط نسبة الإشغال السنوية', u.occupancy.map(pct));
+    sheet += row(esc(u.totalLabel), unitRev[k].map(num), 'bold');
+  });
+  sheet += `<div class="sec">التكاليف التشغيلية السنوية</div>`;
+  F.costs.forEach(c => { sheet += row(esc(c.name), c.pct.map(pct)); });
+  sheet += row('إجمالي التكاليف التشغيلية السنوية', totCost.map(num));
+  sheet += row('صافي الأرباح للمالك سنويًا', net.map(num), 'net');
+  sheet += `<div class="row foot"><div>${esc(D.contact.companyLine)}</div><div class="n c0" style="border:0"></div><div class="n c1" style="border:0"></div><div class="n c2" style="border:0;justify-content:flex-start">${t(D.contact.phone)}</div></div>`;
+  sheet += `<div class="notes"><b>ملاحظات الدراسة:</b>${F.notes.map(n=>`- ${t(n)}`).join('<br>')}</div>`;
+  const extraRows = Math.max(0, F.units.length - 2) * 4 + Math.max(0, F.costs.length - 4);
+  slides.push(`<section class="slide fin" style="--rh:${Math.max(30, 45 - extraRows*3)}px">
+    <div class="sheet">${sheet}</div>
+  </section>`);
+
+  // 7 · closing
+  const C = D.contact;
+  slides.push(`<section class="slide paper close"><div class="grain"></div><div class="band"></div>
+    ${LOGO}
     <div class="info">
-      <div class="eyebrow">العقار</div>
-      <h2>${t(D.property.name)}</h2>
-      <div class="loc">${ICON.pin}<span>${t(D.property.location)}</span></div>
-      <div class="mix">${D.units.map(u=>`<span><b>${u.count}</b>${esc(u.name)}</span>`).join('')}<span><b>${totalUnits}</b>وحدة إجمالًا</span></div>
-      <dl>${D.property.facts.map(f=>`<dt>${esc(f.k)}</dt><dd>${t(f.v)}</dd>`).join('')}</dl>
-    </div>
-    <div class="map">${slot(D.property.mapImage,'map','صورة الموقع على الخريطة')}</div>
-    <div class="photo">${slot(D.property.photo,'img','صورة واجهة العقار')}</div>
-    ${foot(true)}
-  </section>`);
-
-  // 6. financial study
-  page++;
-  const cells = arr => arr.map(v=>`<td class="n">${num(v)}</td>`).join('');
-  let rows = '';
-  D.units.forEach((u,k) => {
-    rows += `<tr class="grp"><td colspan="${N+1}">${esc(u.plural||u.name)}<small>${u.count} وحدات</small></td></tr>`;
-    rows += `<tr><td>سعر الليلة</td>${u.rate.map(v=>`<td class="n">${num(v)}</td>`).join('')}</tr>`;
-    rows += `<tr><td>متوسط نسبة الإشغال السنوية</td>${u.occupancy.map(v=>`<td class="n">${pct(v)}</td>`).join('')}</tr>`;
-    rows += `<tr class="sub"><td>إيراد ${esc(u.plural||u.name)} بالسنة</td>${cells(unitRev[k])}</tr>`;
-  });
-  rows += `<tr class="gap"><td colspan="${N+1}"></td></tr><tr class="tot"><td>إجمالي الإيراد السنوي المتوقع</td>${cells(totRev)}</tr>`;
-  rows += `<tr class="gap"><td colspan="${N+1}"></td></tr><tr class="grp"><td colspan="${N+1}">التكاليف التشغيلية السنوية<small>نسبة من الإيراد</small></td></tr>`;
-  D.costs.forEach((c,k) => {
-    rows += `<tr><td>${esc(c.name)}</td>${costAmt[k].map((v,i)=>`<td class="n"><span class="pct">${pct(c.pct[i])}</span>${num(v)}</td>`).join('')}</tr>`;
-  });
-  rows += `<tr class="tot"><td>إجمالي التكاليف التشغيلية</td>${cells(totCost)}</tr>`;
-  rows += `<tr class="gap"><td colspan="${N+1}"></td></tr><tr class="net"><td>صافي الأرباح للمالك سنويًا</td>${cells(net)}</tr>`;
-  rows += `<tr class="mo"><td>متوسط صافي الربح الشهري</td>${cells(net.map(v=>v/12))}</tr>`;
-  const extra = Math.max(0, D.units.length - 2) * 4 + Math.max(0, D.costs.length - 4);
-  const rh = Math.max(28, 35 - extra * 2);
-  slides.push(`<section class="slide fin" style="--rh:${rh}px">
-    <div class="top">
-      <div><div class="eyebrow">الدراسة المالية</div><h1>الإيراد والعائد المتوقع سنويًا</h1></div>
-      <div class="meta"><b>${t(D.property.name)}</b> · ${totalUnits} وحدة<br>المبالغ بالريال السعودي · ${days} يوم بالسنة</div>
-    </div>
-    <table>
-      <thead><tr><th>البند</th>${D.scenarios.map((s,i)=>`<th class="n"><span class="s${i%3}">${esc(s)}</span></th>`).join('')}</tr></thead>
-      <tbody>${rows}</tbody>
-    </table>
-    <div class="notes"><b>ملاحظات الدراسة</b><ul>${D.notes.map(n=>`<li>${t(n)}</li>`).join('')}</ul></div>
-    ${foot()}
-  </section>`);
-
-  // 7. closing
-  page++;
-  slides.push(`<section class="slide close">
-    <div>
-      ${WORD}
-      <h1>خلّ شقتك تشتغل…<br>وأنت مرتاح</h1>
-      <div class="cta">احجز مكالمة تعريفية</div>
-      <div class="legal">${t(D.contact.legalName)}<br>السجل التجاري: ${t(D.contact.cr)}</div>
-    </div>
-    <div class="contacts">
-      <div class="ct"><span class="ic">${ICON.wa}</span><div><small>واتساب</small><b class="lat">${t(D.contact.whatsapp)}</b></div></div>
-      <div class="ct"><span class="ic">${ICON.web}</span><div><small>الموقع</small><b class="lat">${t(D.contact.website)}</b></div></div>
-      <div class="ct"><span class="ic">${ICON.ig}</span><div><small>انستقرام</small><b class="lat">${t(D.contact.instagram)}</b></div></div>
+      <h2>${esc(C.tagline)}</h2>
+      <div class="phone">${t(C.phone)}</div>
+      <div class="co">${t(C.legalName)}<br><span class="lat">${t(C.legalNameEn)}</span><br>السجل التجاري: <span class="lat">${t(C.cr)}</span></div>
     </div>
   </section>`);
 
-  const deck = document.getElementById('deck');
-  deck.innerHTML = slides.map(s => `<div class="frame">${s}</div>`).join('');
-
-  const fit = () => {
-    const z = Math.min(1, (document.documentElement.clientWidth - 32) / 1920);
-    document.documentElement.style.setProperty('--z', z);
-  };
+  document.getElementById('deck').innerHTML = slides.map(s => `<div class="frame">${s}</div>`).join('');
+  const fit = () => document.documentElement.style.setProperty('--z', Math.min(1, (document.documentElement.clientWidth - 32) / 1920));
   fit(); addEventListener('resize', fit);
   addEventListener('beforeprint', () => document.documentElement.style.setProperty('--z', 1));
   addEventListener('afterprint', fit);
